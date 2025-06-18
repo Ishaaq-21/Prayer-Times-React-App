@@ -1,0 +1,72 @@
+.prayer-card {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.prayer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(218, 165, 32, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.prayer-name {
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+.prayer-time {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+.crescent {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid rgba(218, 165, 32, 0.5);
+  border-radius: 50%;
+  border-right-color: transparent;
+  transform: rotate(-45deg);
+  opacity: 0.6;
+}
+
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(218, 165, 32, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}

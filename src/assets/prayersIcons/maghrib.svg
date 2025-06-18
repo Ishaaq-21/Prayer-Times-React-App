@@ -1,0 +1,21 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M35 20 C 35 20, 25 35, 25 50 C 25 65, 35 80, 35 80 C 20 75, 10 62.5, 10 50 C 10 37.5, 20 25, 35 20 Z"
+              fill="#daa520"
+              opacity="0.9"
+            />
+
+            <path
+              d="M65 35 L67.5 42 L75 42 L69.25 46.5 L71.75 53.5 L65 49 L58.25 53.5 L60.75 46.5 L55 42 L62.5 42 Z"
+              fill="#daa520"
+              opacity="0.9"
+            />
+
+
+            <circle cx="45" cy="30" r="1.5" fill="#daa520" opacity="0.6" />
+            <circle cx="50" cy="25" r="1" fill="#daa520" opacity="0.6" />
+            <circle cx="55" cy="30" r="1.5" fill="#daa520" opacity="0.6" />
+            <circle cx="45" cy="70" r="1.5" fill="#daa520" opacity="0.6" />
+            <circle cx="50" cy="75" r="1" fill="#daa520" opacity="0.6" />
+            <circle cx="55" cy="70" r="1.5" fill="#daa520" opacity="0.6" />
+          </svg>

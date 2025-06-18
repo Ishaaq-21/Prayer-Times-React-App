@@ -1,0 +1,64 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Night sky background -->
+  <rect width="100" height="100" fill="#1a1a2e" opacity="0.3"/>
+  
+  <!-- Moon with radiating moonbeams -->
+  <g transform="translate(50,40)">
+    <!-- Long moonbeams -->
+    <line x1="0" y1="-25" x2="0" y2="-18" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="18" y1="-18" x2="13" y2="-13" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="25" y1="0" x2="18" y2="0" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="18" y1="18" x2="13" y2="13" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="0" y1="25" x2="0" y2="18" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-18" y1="18" x2="-13" y2="13" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-25" y1="0" x2="-18" y2="0" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-18" y1="-18" x2="-13" y2="-13" stroke="#e6e6fa" stroke-width="2.5" opacity="0.8"/>
+    
+    <!-- Shorter moonbeams -->
+    <line x1="13" y1="-22" x2="10" y2="-16" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="22" y1="-13" x2="16" y2="-10" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="22" y1="13" x2="16" y2="10" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="13" y1="22" x2="10" y2="16" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-13" y1="22" x2="-10" y2="16" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-22" y1="13" x2="-16" y2="10" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-22" y1="-13" x2="-16" y2="-10" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-13" y1="-22" x2="-10" y2="-16" stroke="#e6e6fa" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  
+  <!-- Central moon -->
+  <circle cx="50" cy="40" r="12" fill="#9370db" opacity="0.9"/>
+  <circle cx="50" cy="40" r="8" fill="#e6e6fa" opacity="0.8"/>
+  
+  <!-- Moon craters -->
+  <circle cx="48" cy="38" r="1.5" fill="#d8bfd8" opacity="0.7"/>
+  <circle cx="52" cy="42" r="1" fill="#d8bfd8" opacity="0.7"/>
+  <circle cx="51" cy="37" r="0.8" fill="#d8bfd8" opacity="0.6"/>
+  
+  <!-- Scattered stars -->
+  <g fill="#ffffff" opacity="0.9">
+    <!-- Star 1 -->
+    <g transform="translate(25,25)">
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#ffffff" stroke-width="1"/>
+      <line x1="0" y1="-3" x2="0" y2="3" stroke="#ffffff" stroke-width="1"/>
+    </g>
+    <!-- Star 2 -->
+    <g transform="translate(75,30)">
+      <line x1="-2" y1="0" x2="2" y2="0" stroke="#ffffff" stroke-width="0.8"/>
+      <line x1="0" y1="-2" x2="0" y2="2" stroke="#ffffff" stroke-width="0.8"/>
+    </g>
+    <!-- Star 3 -->
+    <g transform="translate(20,65)">
+      <line x1="-2.5" y1="0" x2="2.5" y2="0" stroke="#ffffff" stroke-width="0.9"/>
+      <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="#ffffff" stroke-width="0.9"/>
+    </g>
+    <!-- Star 4 -->
+    <g transform="translate(80,70)">
+      <line x1="-2" y1="0" x2="2" y2="0" stroke="#ffffff" stroke-width="0.7"/>
+      <line x1="0" y1="-2" x2="0" y2="2" stroke="#ffffff" stroke-width="0.7"/>
+    </g>
+    <!-- Small twinkling stars -->
+    <circle cx="35" cy="75" r="0.8" fill="#ffffff" opacity="0.8"/>
+    <circle cx="65" cy="80" r="0.6" fill="#ffffff" opacity="0.7"/>
+    <circle cx="85" cy="50" r="0.7" fill="#ffffff" opacity="0.8"/>
+  </g>
+</svg>

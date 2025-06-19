@@ -22,11 +22,12 @@ export default {
           //used for text, icons and accents
           500: "#FFC107",
           600: "#DAA520",
+          700: "#b5891a",
         },
         accent: {
           //used for buttons, border
-          500: "#FF9800",
-          600: "#CC7A00",
+          500: "#f17b4c",
+          600: "#d96237",
         },
         islamicGreen: {
           500: "#009688",

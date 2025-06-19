@@ -2,9 +2,9 @@ import React from "react";
 import "./searchCompo.css";
 const SearchCompo = () => {
   return (
-    <div className="my-10 flex justify-center items-center">
+    <div className=" flex justify-center items-center">
       <input
-        className="search-text w-64 py-3 px-4 border-0 rounded-l-lg rounded-r-none bg-white/15 text-white text-base  backdrop-blur outline-none transition-all duration-300 focus"
+        className="search-text  py-3 px-4 border-0 rounded-l-lg rounded-r-none bg-white/15 text-white text-base  backdrop-blur outline-none transition-all duration-300 focus"
         type="text"
         placeholder="Search for a city..."
       />

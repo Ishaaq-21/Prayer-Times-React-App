@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-gradient-45 {
+    background-image: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+  }
+  .text-fill-transparent {
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

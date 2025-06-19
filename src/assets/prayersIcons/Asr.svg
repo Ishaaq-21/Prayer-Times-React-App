@@ -13,7 +13,7 @@
                 </g>
                 
                 <!-- Sun positioned for afternoon -->
-                <circle cx="42" cy="35" r="10" fill="#ff7f50" opacity="0.9"/>
+                <circle cx="45" cy="45" r="10" fill="#ff7f50" opacity="0.9"/>
                 
                 <!-- Long shadow -->
                 <ellipse cx="65" cy="70" rx="15" ry="3" fill="#8b4513" opacity="0.4"/>

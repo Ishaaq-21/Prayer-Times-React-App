@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./searchCompo.css";
+import { SearchClickContext } from "../../contexts/PrayersDataProvider";
 
 const SearchCompo = () => {
   const [inputCity, setInputCity] = useState("");
-  console.log("re-renders  : " + inputCity);
+  const { handleSearchClick } = useContext(SearchClickContext);
+  function handleSearchBtnClick() {
+    if (inputCity.trim() !== "") {
+      handleSearchClick(inputCity);
+    }
+  }
   return (
     <div className=" flex justify-center items-center">
       <input
@@ -12,7 +18,10 @@ const SearchCompo = () => {
         placeholder="Search for a city..."
         onChange={(e) => setInputCity(e.target.value)}
       />
-      <button className="btn py-3 px-5 border-0 rounded-r-xl text-white text-base cursor-pointer font-bold bg-secondary-600 transition-all duration-300 ease-in-out hover:bg-secondary-700">
+      <button
+        className="btn py-3 px-5 border-0 rounded-r-xl text-white text-base cursor-pointer font-bold bg-secondary-600 transition-all duration-300 ease-in-out hover:bg-secondary-700"
+        onClick={handleSearchBtnClick}
+      >
         Search
       </button>
     </div>

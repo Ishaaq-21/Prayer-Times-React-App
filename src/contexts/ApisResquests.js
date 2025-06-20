@@ -3,18 +3,21 @@ import prayerCalculationMethodsByCountry from "../CountriesMethodCodes";
 
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
+  try {
+    const cityLocationResp = await axios.get(
+      `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${cityName}`
+    );
+    const cityLocationData = cityLocationResp.data;
 
-  const cityLocationResp = await axios.get(
-    `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${cityName}`
-  );
-  const cityLocationData = cityLocationResp.data;
-
-  if (!cityLocationData.length) throw new Error("An Error has happened");
-  return {
-    latitude: cityLocationData[0].lat,
-    longitude: cityLocationData[0].lon,
-    country: cityLocationData[0].address.country,
-  };
+    if (!cityLocationData.length) throw new Error("There are no city data");
+    return {
+      latitude: cityLocationData[0].lat,
+      longitude: cityLocationData[0].lon,
+      country: cityLocationData[0].address.country,
+    };
+  } catch (err) {
+    throw new Error("Failed : " + err.message);
+  }
 };
 const getPrayersTimesFromApi = async (
   latitude,
@@ -22,21 +25,27 @@ const getPrayersTimesFromApi = async (
 
   countryMethodCode
 ) => {
-  const cityPrayersResp = await axios.get(
-    `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${countryMethodCode}`
-  );
-  const cityPrayerData = cityPrayersResp.data;
-  if (!cityPrayerData) throw new Error("An Error has happened");
-  const prayersTiming = cityPrayerData.data.timings;
-  return {
-    Fajr: prayersTiming.Fajr,
-    Dhuhr: prayersTiming.Dhuhr,
-    Asr: prayersTiming.Asr,
-    Maghrib: prayersTiming.Maghrib,
-    Isha: prayersTiming.Isha,
-  };
+  try {
+    const cityPrayersResp = await axios.get(
+      `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${countryMethodCode}`
+    );
+    const cityPrayerData = cityPrayersResp.data;
+    if (!cityPrayerData) throw new Error("Failed to fetch prayers data");
+    const prayersTiming = cityPrayerData.data.timings;
+    const prayerTimingArr = [
+      { id: 1, prayerName: "Fajr", time: prayersTiming.Fajr },
+      { id: 2, prayerName: "Dhuhr", time: prayersTiming.Dhuhr },
+      { id: 3, prayerName: "Asr", time: prayersTiming.Asr },
+      { id: 4, prayerName: "Maghrib", time: prayersTiming.Maghrib },
+      { id: 5, prayerName: "Isha", time: prayersTiming.Isha },
+    ];
+
+    return prayerTimingArr;
+  } catch (err) {
+    throw new Error("Failed : " + err.message);
+  }
 };
-export const prayersTimes = async (cityName, setError) => {
+export const getPrayersTimes = async (cityName, setError) => {
   setError(null);
   try {
     const cityLocationData = await getCityLocationData(cityName);
@@ -52,7 +61,6 @@ export const prayersTimes = async (cityName, setError) => {
       cityLocationData.longitude,
       countryMethodCode
     );
-    console.log(prayersData);
     return prayersData;
   } catch (err) {
     setError(err.message || "Something went wrong");

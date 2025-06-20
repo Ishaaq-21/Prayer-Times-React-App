@@ -1,7 +1,13 @@
 import axios from "axios";
 import prayerCalculationMethodsByCountry from "./CountriesMethodCodes";
 
-const getCityLocationData = async (cityName) => {
+class notFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "Not Found Error";
+  }
+}
+const getCityLocationData = async (cityName, setNoCityResult) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
   try {
     const cityLocationResp = await axios.get(
@@ -9,14 +15,16 @@ const getCityLocationData = async (cityName) => {
     );
     const cityLocationData = cityLocationResp.data;
 
-    if (!cityLocationData.length) throw new Error("There are no city data");
+    if (!cityLocationData.length) {
+      throw new Error("No city Found");
+    }
     return {
       latitude: cityLocationData[0].lat,
       longitude: cityLocationData[0].lon,
       country: cityLocationData[0].address.country,
     };
   } catch (err) {
-    throw new Error("Failed : " + err.message);
+    throw new Error(err.message);
   }
 };
 const getPrayersTimesFromApi = async (
@@ -45,10 +53,13 @@ const getPrayersTimesFromApi = async (
     throw new Error("Failed : " + err.message);
   }
 };
-export const getPrayersTimes = async (cityName, setError) => {
+export const getPrayersTimes = async (cityName, setError, setNoCityResult) => {
   setError(null);
   try {
-    const cityLocationData = await getCityLocationData(cityName);
+    const cityLocationData = await getCityLocationData(
+      cityName,
+      setNoCityResult
+    );
 
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)
 

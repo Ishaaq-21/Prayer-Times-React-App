@@ -17,7 +17,7 @@ const PrayersDataProvider = ({ children }) => {
     setPrayersTimes(cityPrayerTimes);
   };
   function handleSearchClick(cityNameInput) {
-    if (cityNameInput === lastCityName.current) return;
+    if (cityNameInput === lastCityName.current || error) return;
     lastCityName.current = cityNameInput;
 
     fetchData(cityNameInput);
@@ -27,10 +27,10 @@ const PrayersDataProvider = ({ children }) => {
     lastCityName.current = "Makkah";
     fetchData("Makkah");
   }, []);
-  if (error) return <p className="text-white font-bold">{error}</p>;
+  // if (error) return <p className="text-white font-bold">{error}</p>;
 
   return (
-    <PrayersTimesContext.Provider value={prayersTimes}>
+    <PrayersTimesContext.Provider value={{ prayersTimes, error, noCityResult }}>
       <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
         {children}
       </MainBarInfoConext.Provider>

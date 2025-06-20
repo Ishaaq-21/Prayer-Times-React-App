@@ -1,5 +1,5 @@
 import axios from "axios";
-import prayerCalculationMethodsByCountry from "../CountriesMethodCodes";
+import prayerCalculationMethodsByCountry from "./CountriesMethodCodes";
 
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)

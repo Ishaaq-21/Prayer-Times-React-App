@@ -21,6 +21,11 @@ export default function FivePrayers() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
       {PrayerCardsList}
+      {/* <PrayerCard prayerName={"Dhuhr"} prayerTime={"10:20"} />
+      <PrayerCard prayerName={"Dhuhr"} prayerTime={"10:20"} />
+      <PrayerCard prayerName={"Dhuhr"} prayerTime={"10:20"} />
+      <PrayerCard prayerName={"Dhuhr"} prayerTime={"10:20"} />
+      <PrayerCard prayerName={"Dhuhr"} prayerTime={"10:20"} /> */}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import "./searchCompo.css";
-import { SearchClickContext } from "../../contexts/PrayersTimesProvider";
+import { MainBarInfoConext } from "../../contexts/PrayersTimesProvider";
 
 const SearchCompo = () => {
   const [inputCity, setInputCity] = useState("");
-  const { handleSearchClick } = useContext(SearchClickContext);
+  const { handleSearchClick } = useContext(MainBarInfoConext);
   function handleSearchBtnClick() {
     if (inputCity.trim() !== "") {
       handleSearchClick(inputCity);
@@ -13,7 +13,7 @@ const SearchCompo = () => {
   return (
     <div className=" flex justify-center items-center">
       <input
-        className="search-text  py-3 px-4 border-0 rounded-l-lg rounded-r-none bg-white/15 text-white text-base  backdrop-blur outline-none transition-all duration-300 focus placeholder-orange-200"
+        className="search-text  py-3 px-4 border-0 rounded-l-lg rounded-r-none bg-white/15 text-white text-base  backdrop-blur outline-none transition-all duration-300 focus placeholder-white"
         type="text"
         placeholder="Search for a city..."
         onChange={(e) => setInputCity(e.target.value)}

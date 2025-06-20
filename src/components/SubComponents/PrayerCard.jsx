@@ -1,11 +1,23 @@
 import "./prayerCard.css";
-export default function PrayerCard({ prayerName, prayerTime, icon }) {
+import FajrIcon from "../../assets/prayersIcons/Fajr.svg";
+import DhuhrIcon from "../../assets/prayersIcons/Dhuhr.svg";
+import AsrIcon from "../../assets/prayersIcons/Asr.svg";
+import MaghribIcon from "../../assets/prayersIcons/maghrib.svg";
+import IshaIcon from "../../assets/prayersIcons/Aisha.svg";
+export default function PrayerCard({ prayerName, prayerTime }) {
+  const mapIcons = {
+    Fajr: FajrIcon,
+    Dhuhr: DhuhrIcon,
+    Asr: AsrIcon,
+    Maghrib: MaghribIcon,
+    Isha: IshaIcon,
+  };
   return (
     <>
       <div className="prayer-card bg-black/30 backdrop-blur-lg border-2 rounded-3xl border-amber-400/30 w-11/12 relative overflow-hidden text-center py-2 px-5">
         <img
           className="max-w-24 mx-auto"
-          src={icon}
+          src={mapIcons[prayerName]}
           alt="Maghrib prayer icon"
         />
 

@@ -2,13 +2,13 @@ import { createContext, useEffect, useMemo, useRef, useState } from "react";
 
 import { getPrayersTimes } from "./ApisResquests";
 
-const PrayersTimesContext = createContext({});
+export const PrayersTimesContext = createContext({});
 export const SearchClickContext = createContext({});
 const PrayersDataProvider = ({ children }) => {
   // const [cityName, setCityName] = useState("");
   // const cityName = "Boumedfaa";
   const [error, setError] = useState(null);
-  const [prayersTimes, setPrayersTimes] = useState({});
+  const [prayersTimes, setPrayersTimes] = useState([]);
   const lastCityName = useRef("");
   //this function will be taken by the search input compo
   function handleSearchClick(cityName) {
@@ -19,6 +19,7 @@ const PrayersDataProvider = ({ children }) => {
 
       setPrayersTimes(cityPrayerTimes);
       console.log(cityPrayerTimes);
+      console.log(prayersTimes);
     };
     fetchData();
   }

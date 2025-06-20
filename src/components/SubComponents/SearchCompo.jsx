@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./searchCompo.css";
-import { SearchClickContext } from "../../contexts/PrayersDataProvider";
+import { SearchClickContext } from "../../contexts/PrayersTimesProvider";
 
 const SearchCompo = () => {
   const [inputCity, setInputCity] = useState("");

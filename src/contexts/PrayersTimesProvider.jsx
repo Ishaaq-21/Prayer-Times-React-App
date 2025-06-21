@@ -8,10 +8,15 @@ export const MainBarInfoConext = createContext({});
 const PrayersDataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [prayersTimes, setPrayersTimes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const lastCityName = useRef("");
 
   const fetchData = async (cityName) => {
-    const cityPrayerTimes = await getPrayersTimes(cityName, setError);
+    const cityPrayerTimes = await getPrayersTimes(
+      cityName,
+      setError,
+      setIsLoading
+    );
 
     setPrayersTimes(cityPrayerTimes);
   };
@@ -29,7 +34,7 @@ const PrayersDataProvider = ({ children }) => {
   // if (error) return <p className="text-white font-bold">{error}</p>;
 
   return (
-    <PrayersTimesContext.Provider value={{ prayersTimes, error }}>
+    <PrayersTimesContext.Provider value={{ prayersTimes, error, isLoading }}>
       <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
         {children}
       </MainBarInfoConext.Provider>

@@ -10,6 +10,7 @@ class notFoundError extends Error {
 
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
+
   try {
     const cityLocationResp = await axios.get(
       `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${cityName}`
@@ -58,13 +59,14 @@ const getPrayersTimesFromApi = async (
     throw new Error(err.message);
   }
 };
-export const getPrayersTimes = async (cityName, setError) => {
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this just for debugging
+
+export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
+  setIsLoading(true);
   setError(null);
   try {
     const cityLocationData = await getCityLocationData(cityName);
-
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)
-
     const countryMethodCode =
       prayerCalculationMethodsByCountry[cityLocationData.country] ||
       prayerCalculationMethodsByCountry["default"];
@@ -75,6 +77,7 @@ export const getPrayersTimes = async (cityName, setError) => {
       countryMethodCode
     );
     console.log(prayersData);
+    setIsLoading(false);
     return prayersData;
   } catch (err) {
     if (err instanceof notFoundError) {
@@ -82,6 +85,8 @@ export const getPrayersTimes = async (cityName, setError) => {
     } else {
       setError("Something Went Wrong");
     }
+    setIsLoading(false);
+
     return [];
   }
 };

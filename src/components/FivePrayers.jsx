@@ -8,7 +8,7 @@ export default function FivePrayers() {
   const { error, prayersTimes, isLoading } = useContext(PrayersTimesContext);
 
   let PrayerCardsList = [];
-  console.log(error, prayersTimes);
+  console.log("Error -> " + error, " |||| Prayer times -> ", prayersTimes);
   if (prayersTimes) {
     PrayerCardsList = prayersTimes.map((prayer) => {
       return (

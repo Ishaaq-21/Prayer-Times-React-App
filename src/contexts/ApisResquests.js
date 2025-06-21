@@ -76,7 +76,6 @@ export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
       cityLocationData.longitude,
       countryMethodCode
     );
-    console.log(prayersData);
     setIsLoading(false);
     return prayersData;
   } catch (err) {

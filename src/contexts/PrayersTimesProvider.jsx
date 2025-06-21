@@ -31,7 +31,6 @@ const PrayersDataProvider = ({ children }) => {
     lastCityName.current = "Makkah";
     fetchData("Makkah");
   }, []);
-  // if (error) return <p className="text-white font-bold">{error}</p>;
 
   return (
     <PrayersTimesContext.Provider value={{ prayersTimes, error, isLoading }}>

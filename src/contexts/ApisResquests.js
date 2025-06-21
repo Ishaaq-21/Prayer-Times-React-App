@@ -7,7 +7,8 @@ class notFoundError extends Error {
     this.name = "Not Found Error";
   }
 }
-const getCityLocationData = async (cityName, setNoCityResult) => {
+
+const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
   try {
     const cityLocationResp = await axios.get(
@@ -16,7 +17,7 @@ const getCityLocationData = async (cityName, setNoCityResult) => {
     const cityLocationData = cityLocationResp.data;
 
     if (!cityLocationData.length) {
-      throw new Error("No city Found");
+      throw new notFoundError("No City Results");
     }
     return {
       latitude: cityLocationData[0].lat,
@@ -24,7 +25,11 @@ const getCityLocationData = async (cityName, setNoCityResult) => {
       country: cityLocationData[0].address.country,
     };
   } catch (err) {
-    throw new Error(err.message);
+    if (err instanceof notFoundError) {
+      throw new notFoundError("No City Results");
+    } else {
+      throw new Error(err.message);
+    }
   }
 };
 const getPrayersTimesFromApi = async (
@@ -50,16 +55,13 @@ const getPrayersTimesFromApi = async (
 
     return prayerTimingArr;
   } catch (err) {
-    throw new Error("Failed : " + err.message);
+    throw new Error(err.message);
   }
 };
-export const getPrayersTimes = async (cityName, setError, setNoCityResult) => {
+export const getPrayersTimes = async (cityName, setError) => {
   setError(null);
   try {
-    const cityLocationData = await getCityLocationData(
-      cityName,
-      setNoCityResult
-    );
+    const cityLocationData = await getCityLocationData(cityName);
 
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)
 
@@ -72,8 +74,14 @@ export const getPrayersTimes = async (cityName, setError, setNoCityResult) => {
       cityLocationData.longitude,
       countryMethodCode
     );
+    console.log(prayersData);
     return prayersData;
   } catch (err) {
-    setError(err.message || "Something went wrong");
+    if (err instanceof notFoundError) {
+      setError("No City Results");
+    } else {
+      setError("Something Went Wrong");
+    }
+    return [];
   }
 };

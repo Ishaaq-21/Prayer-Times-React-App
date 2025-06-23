@@ -5,32 +5,13 @@ import {
   PrayersTimesContext,
 } from "../contexts/PrayersTimesProvider";
 import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-
-dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
-function getNextPrayer(prayersTimes, currTime) {
-  if (!prayersTimes.length) return null;
-
-  let nextPrayer = prayersTimes.find((prayer) => {
-    return dayjs(prayer.time, "HH:mm").isAfter(dayjs(currTime, "HH:mm:ss"));
-  });
-
-  return nextPrayer || prayersTimes[0];
-}
-function getRemainingTimeToNextPrayer(prayersTimes, currTime, nextPrayerTime) {
-  if (!prayersTimes.length) return "00:00:00";
-  if (!nextPrayerTime || currTime.isAfter(nextPrayerTime)) {
-    nextPrayerTime = nextPrayerTime.add(1, "day");
-  }
-
-  const diff = nextPrayerTime.diff(currTime);
-  const dur = dayjs.duration(Math.max(diff, 0));
-  return `${String(Math.floor(dur.asHours())).padStart(2, "0")}:${String(dur.minutes()).padStart(2, "0")}:${String(dur.seconds()).padStart(2, "0")}`;
-}
-
+import {
+  handleFinalRemainingTimesInterval,
+  getNextPrayer,
+} from "./Helpers/dateLogic";
 //Main compo
 export default function MainBar() {
   const { lastCityName } = useContext(MainBarInfoConext);
@@ -38,20 +19,18 @@ export default function MainBar() {
   const [remainingTime, setRemainingTime] = useState("");
   const [nextPrayer, setNextPrayer] = useState(null);
 
+  console.log(nextPrayer);
+  //the problem is that the functions are making difference between my current time and the time of that city and this is correct, cuz when we try to find the next prayer in the find function, it returns the prayer that is near to my current time not the prayer that is near to the city current time and we need to handle this
   useEffect(() => {
     const currTime = dayjs();
     setNextPrayer(getNextPrayer(prayersTimes, currTime));
-
+    setRemainingTime("00:00:00");
     const intervalId = setInterval(() => {
-      const currTime = dayjs();
-      const currNextPrayer = getNextPrayer(prayersTimes, currTime);
-      const currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
-      if (!currNextPrayer || currTime.isAfter(nextPrayer.time, "HH:mm")) {
-        setNextPrayer(currNextPrayer);
-      }
-      console.log("CuurNext prayer -> " + currNextPrayer.time);
-      setRemainingTime(
-        getRemainingTimeToNextPrayer(prayersTimes, currTime, currNextPrayerTime)
+      handleFinalRemainingTimesInterval(
+        prayersTimes,
+        nextPrayer,
+        setNextPrayer,
+        setRemainingTime
       );
     }, 1000);
     return () => clearInterval(intervalId);
@@ -70,7 +49,7 @@ export default function MainBar() {
       </p>
       <div className="sm:col-span-2 lg:col-span-1">
         <p className="mb-1 text-4xl font-bold shadow-text text-secondary-500">
-          Next Prayer in :
+          {nextPrayer && nextPrayer.prayerName} in :
         </p>
         <p className="text-white text-center text-4xl font-bold shadow-text mr-2">
           {remainingTime}

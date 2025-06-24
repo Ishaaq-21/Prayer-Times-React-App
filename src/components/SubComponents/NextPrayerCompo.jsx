@@ -26,11 +26,11 @@ export default function NextPrayer({ prayersTimes, isLoading }) {
     return () => clearInterval(intervalId);
   }, [prayersTimes, nextPrayer]);
   return (
-    <div className="sm:col-span-2 lg:col-span-1">
-      <p className="mb-1 text-4xl font-bold shadow-text text-secondary-500">
-        {nextPrayer && nextPrayer.prayerName} in :
-      </p>
-      <p className="text-white text-center text-4xl font-bold shadow-text mr-2">
+    <div className="md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl ">
+      <p className=" text-white mb-1  font-bold shadow-text tracking-wide leading-relaxed ">
+        <span className="text-accent-500  ">
+          {(nextPrayer && nextPrayer.prayerName) || "Next Prayer"} in :{" "}
+        </span>
         {isLoading ? "00:00:00" : remainingTime}
       </p>
     </div>

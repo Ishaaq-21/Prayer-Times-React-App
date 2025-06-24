@@ -21,7 +21,7 @@ export default function FivePrayers() {
     });
   }
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
+    <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
       {isLoading && <LoadeingIndicator />}
       {error && <NoResult message={error} />}
       {!error && !isLoading && PrayerCardsList}

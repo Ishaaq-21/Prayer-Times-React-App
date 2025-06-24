@@ -5,6 +5,7 @@ import {
   PrayersTimesContext,
 } from "../contexts/PrayersTimesProvider";
 import NextPrayer from "./SubComponents/NextPrayerCompo";
+import CityTime from "./SubComponents/CityTime";
 
 //Main compo
 export default function MainBar() {
@@ -24,14 +25,7 @@ export default function MainBar() {
             ? lastCityName.current
             : "Unknown"}
       </p>
-      <div className=" text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  ">
-        <p className="mb-1  font-bold shadow-text text-secondary-500 inline-block tracking-wide leading-relaxed mr-3">
-          Time :
-        </p>
-        <p className="text-white text-center font-bold shadow-text inline">
-          15:20:30
-        </p>
-      </div>
+      <CityTime />
       <NextPrayer prayersTimes={prayersTimes} isLoading={isLoading} />
     </div>
   );

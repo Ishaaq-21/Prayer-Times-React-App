@@ -70,7 +70,8 @@ export function handleFinalRemainingTimesInterval(
 ) {
   const currTime = dayjs();
   const currNextPrayer = getNextPrayer(prayersTimes, currTime);
-  const currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
+  let currNextPrayerTime = null;
+  if (currNextPrayer) currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
 
   if (!nextPrayer || currTime.isAfter(nextPrayer.time, "HH:mm")) {
     setNextPrayer(currNextPrayer);

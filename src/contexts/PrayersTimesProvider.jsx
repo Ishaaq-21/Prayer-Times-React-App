@@ -9,16 +9,17 @@ const PrayersDataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [prayersTimes, setPrayersTimes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [cityTimeString, setCityTimeString] = useState(null);
   const lastCityName = useRef("");
 
   const fetchData = async (cityName) => {
-    const cityPrayerTimes = await getPrayersTimes(
+    const { prayersData, searchedCityTimeString } = await getPrayersTimes(
       cityName,
       setError,
       setIsLoading
     );
-
-    setPrayersTimes(cityPrayerTimes);
+    setPrayersTimes(prayersData);
+    setCityTimeString(searchedCityTimeString);
   };
   function handleSearchClick(cityNameInput) {
     if (cityNameInput === lastCityName.current) return;
@@ -33,7 +34,9 @@ const PrayersDataProvider = ({ children }) => {
   }, []);
 
   return (
-    <PrayersTimesContext.Provider value={{ prayersTimes, error, isLoading }}>
+    <PrayersTimesContext.Provider
+      value={{ prayersTimes, error, isLoading, cityTimeString }}
+    >
       <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
         {children}
       </MainBarInfoConext.Provider>

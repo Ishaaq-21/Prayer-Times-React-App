@@ -7,7 +7,7 @@ class notFoundError extends Error {
     this.name = "Not Found Error";
   }
 }
-
+const timeZoneApiKey = import.meta.env.VITE_TIMEZONEDB_API_KEY;
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
 
@@ -31,6 +31,18 @@ const getCityLocationData = async (cityName) => {
     } else {
       throw new Error(err.message);
     }
+  }
+};
+const getTimeOfCity = async (latitude, longitude) => {
+  try {
+    const timeResponse = await axios.get(
+      `https:api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
+    );
+    if (!timeResponse) throw new Error("Something went wrong");
+    const rawCurrTimStringe = timeResponse.data.formatted;
+    return rawCurrTimStringe;
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
 const getPrayersTimesFromApi = async (
@@ -70,14 +82,18 @@ export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
     const countryMethodCode =
       prayerCalculationMethodsByCountry[cityLocationData.country] ||
       prayerCalculationMethodsByCountry["default"];
-
+    // await getTimeOfCity(cityLocationData.latitude, cityLocationData.longitude);
+    const searchedCityTimeString = await getTimeOfCity(
+      cityLocationData.latitude,
+      cityLocationData.longitude
+    );
     const prayersData = await getPrayersTimesFromApi(
       cityLocationData.latitude,
       cityLocationData.longitude,
       countryMethodCode
     );
     setIsLoading(false);
-    return prayersData;
+    return { prayersData, searchedCityTimeString };
   } catch (err) {
     if (err instanceof notFoundError) {
       setError("No City Results");
@@ -86,6 +102,6 @@ export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
     }
     setIsLoading(false);
 
-    return [];
+    return { pryaersData: [], searchedCityTimeStamp: 0 };
   }
 };

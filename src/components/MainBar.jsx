@@ -97,7 +97,7 @@ export default function MainBar() {
           <span className="text-accent-500  ">
             {(nextPrayer && nextPrayer.prayerName) || "Next Prayer"} in :{" "}
           </span>
-          {isLoading || !remainingTime ? "00:00:00" : remainingTime}
+          {isLoading || !remainingTime || error ? "00:00:00" : remainingTime}
         </p>
       </div>
     </div>

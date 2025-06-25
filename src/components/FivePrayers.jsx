@@ -10,10 +10,11 @@ export default function FivePrayers() {
   let PrayerCardsList = [];
   console.log("Error -> " + error, " |||| Prayer times -> ", prayersTimes);
   if (prayersTimes) {
-    PrayerCardsList = prayersTimes.map((prayer) => {
+    PrayerCardsList = prayersTimes.map((prayer, index) => {
       return (
         <PrayerCard
           key={prayer.id}
+          className={index === 4 ? "col-span-full sm:col-span-1" : ""}
           prayerName={prayer.prayerName}
           prayerTime={prayer.time}
         />
@@ -21,7 +22,7 @@ export default function FivePrayers() {
     });
   }
   return (
-    <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
       {isLoading && <LoadeingIndicator />}
       {error && <NoResult message={error} />}
       {!error && !isLoading && PrayerCardsList}

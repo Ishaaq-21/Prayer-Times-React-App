@@ -1,7 +1,7 @@
 import { createContext, useEffect, useMemo, useRef, useState } from "react";
 
 import { getPrayersTimes } from "./ApisResquests";
-
+import { notFoundError } from "./ApisResquests";
 export const PrayersTimesContext = createContext({});
 export const MainBarInfoConext = createContext({});
 
@@ -13,13 +13,22 @@ const PrayersDataProvider = ({ children }) => {
   const lastCityName = useRef("");
 
   const fetchData = async (cityName) => {
-    const { prayersData, searchedCityTimeString } = await getPrayersTimes(
-      cityName,
-      setError,
-      setIsLoading
-    );
-    setPrayersTimes(prayersData);
-    setCityTimeString(searchedCityTimeString);
+    try {
+      setIsLoading(true);
+      setError(null);
+      const { prayersData, searchedCityTimeString } =
+        await getPrayersTimes(cityName);
+      setPrayersTimes(prayersData);
+      setCityTimeString(searchedCityTimeString);
+      setIsLoading(false);
+    } catch (error) {
+      if (error instanceof notFoundError) {
+        setError("No City Results");
+      } else {
+        setError("Something went wrong");
+      }
+      setIsLoading(false);
+    }
   };
   function handleSearchClick(cityNameInput) {
     lastCityName.current = cityNameInput;

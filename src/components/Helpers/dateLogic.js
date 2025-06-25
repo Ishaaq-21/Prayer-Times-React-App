@@ -11,7 +11,7 @@ dayjs.extend(customParseFormat);
  * If no prayer is found (i.e., it's after the last prayer of the day), it returns Fajr (index 0).
  */
 export function getNextPrayer(prayersTimes, currTime) {
-  if (!prayersTimes.length) return null;
+  if (!prayersTimes || !prayersTimes.length) return null;
 
   let nextPrayer = prayersTimes.find((prayer) => {
     return dayjs(prayer.time, "HH:mm").isAfter(dayjs(currTime, "HH:mm:ss"));

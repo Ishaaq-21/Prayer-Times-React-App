@@ -1,7 +1,7 @@
 import axios from "axios";
 import prayerCalculationMethodsByCountry from "./CountriesMethodCodes";
 
-class notFoundError extends Error {
+export class notFoundError extends Error {
   constructor(message) {
     super(message);
     this.name = "Not Found Error";
@@ -74,9 +74,7 @@ const getPrayersTimesFromApi = async (
 };
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this just for debugging
 
-export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
-  setIsLoading(true);
-  setError(null);
+export const getPrayersTimes = async (cityName) => {
   try {
     const cityLocationData = await getCityLocationData(cityName);
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)
@@ -93,16 +91,12 @@ export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
       cityLocationData.longitude,
       countryMethodCode
     );
-    setIsLoading(false);
     return { prayersData, searchedCityTimeString };
   } catch (err) {
     if (err instanceof notFoundError) {
-      setError("No City Results");
+      throw new notFoundError("Not found");
     } else {
-      setError("Something Went Wrong");
+      throw new Error("Something went wrong");
     }
-    setIsLoading(false);
-
-    return { prayersData: [], searchedCityTimeStamp: 0 };
   }
 };

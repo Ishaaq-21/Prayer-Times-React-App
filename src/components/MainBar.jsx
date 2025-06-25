@@ -30,14 +30,24 @@ export default function MainBar() {
   const [nextPrayer, setNextPrayer] = useState(null);
 
   const nextPrayerRef = useRef(null);
+  // console.log(
+  //   "From every Render ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> nextPrayer name "
+  // );
+  // if (nextPrayer) console.log(nextPrayer.prayerName);
+  // console.log(
+  //   "From every Render ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> nextPrayerRef name "
+  // );
+
   function resetRemainingTimeAfterSearchClick() {
+    console.log(
+      "This is now will be excuted *****/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*//"
+    );
     setRemainingTime("00:00:00");
     setNextPrayer(null);
   }
   useEffect(() => {
     nextPrayerRef.current = nextPrayer;
   }, [nextPrayer]);
-
   useEffect(() => {
     setCityCurrTime(
       initialCityTimeString
@@ -52,11 +62,12 @@ export default function MainBar() {
         const newTime = prevTime
           ? dayjs(prevTime, "HH:mm:ss").add(1, "second").format("HH:mm:ss")
           : dayjs().format("HH:mm:ss");
-
+        console.log("Next prayer => ");
+        console.log(nextPrayer); // the next prayer is not updating
         setRemainingTime(() => {
           return handleFinalRemainingTimesInterval(
             prayersTimes,
-            nextPrayerRef.current,
+            nextPrayerRef.current, // this is sending a stale value, how can I fix it ?
             setNextPrayer,
             newTime
           );

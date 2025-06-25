@@ -6,7 +6,7 @@ const SearchCompo = ({ resetCityTimeOnSearchClick }) => {
   const [inputCity, setInputCity] = useState("");
   const { handleSearchClick, lastCityName } = useContext(MainBarInfoConext);
   function handleSearchBtnClick() {
-    if (inputCity.trim() !== "" && inputCity !== lastCityName.current) {
+    if (inputCity.trim() !== "") {
       resetCityTimeOnSearchClick();
       handleSearchClick(inputCity);
     }

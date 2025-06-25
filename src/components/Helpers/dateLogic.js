@@ -71,14 +71,21 @@ export function handleFinalRemainingTimesInterval(
   cityCurrTime
 ) {
   const currNextPrayer = getNextPrayer(prayersTimes, cityCurrTime);
+
   let currNextPrayerTime = null;
-  if (currNextPrayer) currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
+  if (currNextPrayer) {
+    currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
+  }
   //this because cityCurrtime is passed as "hh:mm:ss" string so we need to convert it to dayjs obj, in order to compare
   let cityCurrDayJs = dayjs(cityCurrTime, "HH:mm:ss");
-  if (!nextPrayer || cityCurrDayJs.isAfter(nextPrayer.time, "HH:mm")) {
+
+  if (
+    !nextPrayer ||
+    cityCurrDayJs.isAfter(dayjs(nextPrayer.time, "HH:mm")) ||
+    currNextPrayerTime.isBefore(dayjs(nextPrayer.time, "HH:mm"))
+  ) {
     setNextPrayer(currNextPrayer);
   }
-  console.log(cityCurrTime);
   return getRemainingTimeToNextPrayer(
     prayersTimes,
     cityCurrDayJs,

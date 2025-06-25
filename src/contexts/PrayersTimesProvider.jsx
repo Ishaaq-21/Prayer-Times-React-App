@@ -30,6 +30,7 @@ const PrayersDataProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
+  // I need to work on translation then move to the logic
   function handleSearchClick(cityNameInput) {
     lastCityName.current = cityNameInput;
 

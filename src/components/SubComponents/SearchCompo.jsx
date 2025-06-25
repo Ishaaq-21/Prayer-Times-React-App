@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import "./searchCompo.css";
 import { MainBarInfoConext } from "../../contexts/PrayersTimesProvider";
 
-const SearchCompo = () => {
+const SearchCompo = ({ resetCityTimeOnSearchClick }) => {
   const [inputCity, setInputCity] = useState("");
-  const { handleSearchClick } = useContext(MainBarInfoConext);
+  const { handleSearchClick, lastCityName } = useContext(MainBarInfoConext);
   function handleSearchBtnClick() {
-    if (inputCity.trim() !== "") {
+    if (inputCity.trim() !== "" && inputCity !== lastCityName.current) {
+      resetCityTimeOnSearchClick();
       handleSearchClick(inputCity);
     }
   }

@@ -1,32 +1,105 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SearchCompo from "./SubComponents/SearchCompo";
 import {
   MainBarInfoConext,
   PrayersTimesContext,
 } from "../contexts/PrayersTimesProvider";
-import NextPrayer from "./SubComponents/NextPrayerCompo";
-import CityTime from "./SubComponents/CityTime";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import {
+  getNextPrayer,
+  handleFinalRemainingTimesInterval,
+} from "./Helpers/dateLogic";
+dayjs.extend(duration);
+dayjs.extend(customParseFormat);
 
+/*Start Compoenent */
 //Main compo
 export default function MainBar() {
   const { lastCityName } = useContext(MainBarInfoConext);
-  const { prayersTimes, isLoading } = useContext(PrayersTimesContext);
+  const {
+    prayersTimes,
+    isLoading,
+    error,
+    cityTimeString: initialCityTimeString,
+  } = useContext(PrayersTimesContext);
 
-  //the problem is that the functions are making difference between my current time and the prayertime of that city and this is incorrect, cuz when we try to find the next prayer in the find function, it returns the prayer that is near to my current time not the prayer that is near to the city current time and we need to handle this
+  const [cityCurrTime, setCityCurrTime] = useState(null);
+  const [remainingTime, setRemainingTime] = useState("");
+  const [nextPrayer, setNextPrayer] = useState(null);
+
+  const nextPrayerRef = useRef(null);
+  function resetRemainingTimeAfterSearchClick() {
+    setRemainingTime("00:00:00");
+    setNextPrayer(null);
+  }
+  useEffect(() => {
+    nextPrayerRef.current = nextPrayer;
+  }, [nextPrayer]);
+
+  useEffect(() => {
+    setCityCurrTime(
+      initialCityTimeString
+        ? dayjs(initialCityTimeString, "YYYY-MM-DD HH:mm:ss")
+            .add(1, "second")
+            .format("HH:mm:ss")
+        : null
+    );
+
+    const intervalId = setInterval(() => {
+      setCityCurrTime((prevTime) => {
+        const newTime = prevTime
+          ? dayjs(prevTime, "HH:mm:ss").add(1, "second").format("HH:mm:ss")
+          : dayjs().format("HH:mm:ss");
+
+        setRemainingTime(() => {
+          return handleFinalRemainingTimesInterval(
+            prayersTimes,
+            nextPrayerRef.current,
+            setNextPrayer,
+            newTime
+          );
+        });
+        return newTime;
+      });
+      //the remaining time is not updating
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [initialCityTimeString, prayersTimes]);
 
   return (
     <div className="my-8 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
-      <SearchCompo></SearchCompo>
+      <SearchCompo
+        resetCityTimeOnSearchClick={resetRemainingTimeAfterSearchClick}
+      ></SearchCompo>
       <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
         <span className="text-secondary-500">City : </span>{" "}
         {isLoading
           ? "..."
-          : prayersTimes.length > 0
+          : prayersTimes && prayersTimes.length > 0
             ? lastCityName.current
             : "Unknown"}
       </p>
-      <CityTime />
-      <NextPrayer prayersTimes={prayersTimes} isLoading={isLoading} />
+      <div className=" text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  ">
+        <p className="mb-1  font-bold shadow-text text-secondary-500 inline-block tracking-wide leading-relaxed mr-3">
+          Time :
+        </p>
+        <p className="text-white text-center font-bold shadow-text inline">
+          {isLoading || error ? "00:00:00" : cityCurrTime}
+        </p>
+      </div>{" "}
+      <div className="md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl ">
+        <p className=" text-white mb-1  font-bold shadow-text tracking-wide leading-relaxed ">
+          <span className="text-accent-500  ">
+            {(nextPrayer && nextPrayer.prayerName) || "Next Prayer"} in :{" "}
+          </span>
+          {isLoading || !remainingTime ? "00:00:00" : remainingTime}
+        </p>
+      </div>
     </div>
   );
 }

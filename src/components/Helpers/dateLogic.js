@@ -32,7 +32,9 @@ export function getRemainingTimeToNextPrayer(
   currTime,
   nextPrayerTime
 ) {
-  if (!prayersTimes.length) return "00:00:00";
+  if (!prayersTimes || !prayersTimes.length) {
+    return "00:00:00";
+  }
 
   // If the current time is after the next prayer time, we assume it's the Fajr of the next day
 
@@ -66,17 +68,20 @@ export function handleFinalRemainingTimesInterval(
   prayersTimes,
   nextPrayer,
   setNextPrayer,
-  setRemainingTime
+  cityCurrTime
 ) {
-  const currTime = dayjs();
-  const currNextPrayer = getNextPrayer(prayersTimes, currTime);
+  const currNextPrayer = getNextPrayer(prayersTimes, cityCurrTime);
   let currNextPrayerTime = null;
   if (currNextPrayer) currNextPrayerTime = dayjs(currNextPrayer.time, "HH:mm");
-
-  if (!nextPrayer || currTime.isAfter(nextPrayer.time, "HH:mm")) {
+  //this because cityCurrtime is passed as "hh:mm:ss" string so we need to convert it to dayjs obj, in order to compare
+  let cityCurrDayJs = dayjs(cityCurrTime, "HH:mm:ss");
+  if (!nextPrayer || cityCurrDayJs.isAfter(nextPrayer.time, "HH:mm")) {
     setNextPrayer(currNextPrayer);
   }
-  setRemainingTime(
-    getRemainingTimeToNextPrayer(prayersTimes, currTime, currNextPrayerTime)
+  console.log(cityCurrTime);
+  return getRemainingTimeToNextPrayer(
+    prayersTimes,
+    cityCurrDayJs,
+    currNextPrayerTime
   );
 }

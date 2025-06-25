@@ -9,7 +9,7 @@ const PrayersDataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [prayersTimes, setPrayersTimes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [cityTimeString, setCityTimeString] = useState(null);
+  const [cityTimeString, setCityTimeString] = useState("");
   const lastCityName = useRef("");
 
   const fetchData = async (cityName) => {
@@ -22,7 +22,6 @@ const PrayersDataProvider = ({ children }) => {
     setCityTimeString(searchedCityTimeString);
   };
   function handleSearchClick(cityNameInput) {
-    if (cityNameInput === lastCityName.current) return;
     lastCityName.current = cityNameInput;
 
     fetchData(cityNameInput);

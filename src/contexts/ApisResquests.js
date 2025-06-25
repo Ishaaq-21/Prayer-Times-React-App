@@ -8,6 +8,7 @@ class notFoundError extends Error {
   }
 }
 const timeZoneApiKey = import.meta.env.VITE_TIMEZONEDB_API_KEY;
+console.log(timeZoneApiKey);
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
 
@@ -102,6 +103,6 @@ export const getPrayersTimes = async (cityName, setError, setIsLoading) => {
     }
     setIsLoading(false);
 
-    return { pryaersData: [], searchedCityTimeStamp: 0 };
+    return { prayersData: [], searchedCityTimeStamp: 0 };
   }
 };

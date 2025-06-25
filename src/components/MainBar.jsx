@@ -11,6 +11,7 @@ import {
   getNextPrayer,
   handleFinalRemainingTimesInterval,
 } from "./Helpers/dateLogic";
+import { ThreeDot } from "react-loading-indicators";
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
@@ -62,12 +63,11 @@ export default function MainBar() {
         const newTime = prevTime
           ? dayjs(prevTime, "HH:mm:ss").add(1, "second").format("HH:mm:ss")
           : dayjs().format("HH:mm:ss");
-        console.log("Next prayer => ");
-        console.log(nextPrayer); // the next prayer is not updating
+
         setRemainingTime(() => {
           return handleFinalRemainingTimesInterval(
             prayersTimes,
-            nextPrayerRef.current, // this is sending a stale value, how can I fix it ?
+            nextPrayerRef.current,
             setNextPrayer,
             newTime
           );
@@ -89,11 +89,13 @@ export default function MainBar() {
       ></SearchCompo>
       <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
         <span className="text-secondary-500">City : </span>{" "}
-        {isLoading
-          ? "..."
-          : prayersTimes && prayersTimes.length > 0
-            ? lastCityName.current
-            : "Unknown"}
+        {isLoading ? (
+          <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
+        ) : prayersTimes && prayersTimes.length > 0 ? (
+          lastCityName.current
+        ) : (
+          "Unknown"
+        )}
       </p>
       <div className=" text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  ">
         <p className="mb-1  font-bold shadow-text text-secondary-500 inline-block tracking-wide leading-relaxed mr-3">

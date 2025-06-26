@@ -12,6 +12,8 @@ import {
   handleFinalRemainingTimesInterval,
 } from "./Helpers/dateLogic";
 import { ThreeDot } from "react-loading-indicators";
+import CityTime from "./SubComponents/CityTime";
+import NextPrayerTime from "./SubComponents/NextPrayerTime";
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
@@ -29,27 +31,18 @@ export default function MainBar() {
   const [cityCurrTime, setCityCurrTime] = useState(null);
   const [remainingTime, setRemainingTime] = useState("");
   const [nextPrayer, setNextPrayer] = useState(null);
-
+  const [gettingTime, setGettingTime] = useState(null);
   const nextPrayerRef = useRef(null);
-  // console.log(
-  //   "From every Render ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> nextPrayer name "
-  // );
-  // if (nextPrayer) console.log(nextPrayer.prayerName);
-  // console.log(
-  //   "From every Render ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> nextPrayerRef name "
-  // );
-
-  function resetRemainingTimeAfterSearchClick() {
-    console.log(
-      "This is now will be excuted *****/*/*/*/*/*/*/*/*/*/*/*/*//*/*/*/*//"
-    );
-    setRemainingTime("00:00:00");
+  const intervalId = useRef(0);
+  function resetNextPrayer() {
     setNextPrayer(null);
+    clearInterval(intervalId.current);
   }
   useEffect(() => {
     nextPrayerRef.current = nextPrayer;
   }, [nextPrayer]);
   useEffect(() => {
+    setGettingTime(true);
     setCityCurrTime(
       initialCityTimeString
         ? dayjs(initialCityTimeString, "YYYY-MM-DD HH:mm:ss")
@@ -58,7 +51,7 @@ export default function MainBar() {
         : null
     );
 
-    const intervalId = setInterval(() => {
+    intervalId.current = setInterval(() => {
       setCityCurrTime((prevTime) => {
         const newTime = prevTime
           ? dayjs(prevTime, "HH:mm:ss").add(1, "second").format("HH:mm:ss")
@@ -72,47 +65,42 @@ export default function MainBar() {
             newTime
           );
         });
+        setGettingTime(false);
         return newTime;
       });
       //the remaining time is not updating
     }, 1000);
 
     return () => {
-      clearInterval(intervalId);
+      clearInterval(intervalId.current);
     };
   }, [initialCityTimeString, prayersTimes]);
 
   return (
     <div className="my-8 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
-      <SearchCompo
-        resetCityTimeOnSearchClick={resetRemainingTimeAfterSearchClick}
-      ></SearchCompo>
+      <SearchCompo resetNextPrayer={resetNextPrayer}></SearchCompo>
       <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
         <span className="text-secondary-500">City : </span>{" "}
         {isLoading ? (
           <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
-        ) : prayersTimes && prayersTimes.length > 0 ? (
+        ) : !error ? (
           lastCityName.current
         ) : (
           "Unknown"
         )}
       </p>
-      <div className=" text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  ">
-        <p className="mb-1  font-bold shadow-text text-secondary-500 inline-block tracking-wide leading-relaxed mr-3">
-          Time :
-        </p>
-        <p className="text-white text-center font-bold shadow-text inline">
-          {isLoading || error ? "00:00:00" : cityCurrTime}
-        </p>
-      </div>{" "}
-      <div className="md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl ">
-        <p className=" text-white mb-1  font-bold shadow-text tracking-wide leading-relaxed ">
-          <span className="text-accent-500  ">
-            {(nextPrayer && nextPrayer.prayerName) || "Next Prayer"} in :{" "}
-          </span>
-          {isLoading || !remainingTime || error ? "00:00:00" : remainingTime}
-        </p>
-      </div>
+      <CityTime
+        isLoading={isLoading}
+        error={error}
+        cityCurrTime={cityCurrTime}
+      />
+      <NextPrayerTime
+        nextPrayer={nextPrayer}
+        gettingTime={gettingTime}
+        isLoading={isLoading}
+        error={error}
+        remainingTime={remainingTime}
+      />
     </div>
   );
 }

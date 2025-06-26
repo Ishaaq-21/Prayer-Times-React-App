@@ -40,7 +40,6 @@ const PrayersDataProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    i18n.changeLanguage("en");
     lastCityName.current = "Makkah";
     fetchData("Makkah");
   }, []);

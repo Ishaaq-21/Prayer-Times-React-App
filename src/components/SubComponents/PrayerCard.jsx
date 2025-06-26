@@ -4,8 +4,7 @@ import DhuhrIcon from "../../assets/prayersIcons/Dhuhr.svg";
 import AsrIcon from "../../assets/prayersIcons/Asr.svg";
 import MaghribIcon from "../../assets/prayersIcons/maghrib.svg";
 import IshaIcon from "../../assets/prayersIcons/Aisha.svg";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+
 export default function PrayerCard({ prayerName, prayerTime, t }) {
   const mapIcons = {
     Fajr: FajrIcon,

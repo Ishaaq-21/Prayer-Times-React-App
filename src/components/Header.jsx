@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./SubComponents/ToggleLanguage";
 
 export default function Header() {
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    i18n.changeLanguage("ar");
-  }, []);
+  const { t } = useTranslation();
+
   return (
     <>
       <LanguageToggle />

@@ -4,7 +4,7 @@ import { MainBarInfoConext } from "../../../contexts/PrayersTimesProvider";
 
 const SearchCompo = ({ resetNextPrayer, t }) => {
   const [inputCity, setInputCity] = useState("");
-  const { handleSearchClick, lastCityName } = useContext(MainBarInfoConext);
+  const { handleSearchClick } = useContext(MainBarInfoConext);
   function handleSearchBtnClick() {
     if (inputCity.trim() !== "") {
       resetNextPrayer();

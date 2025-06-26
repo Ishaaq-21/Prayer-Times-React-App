@@ -5,7 +5,7 @@ import NoResult from "./SubComponents/NoResult";
 import LoadeingIndicator from "./SubComponents/LoadingIndicator";
 
 export default function FivePrayers() {
-  const { error, prayersTimes, isLoading } = useContext(PrayersTimesContext);
+  const { error, prayersTimes, isLoading, t } = useContext(PrayersTimesContext);
 
   let PrayerCardsList = [];
   console.log("Error -> " + error, " |||| Prayer times -> ", prayersTimes);
@@ -17,6 +17,7 @@ export default function FivePrayers() {
           className={index === 4 ? "col-span-full sm:col-span-1" : ""}
           prayerName={prayer.prayerName}
           prayerTime={prayer.time}
+          t={t}
         />
       );
     });

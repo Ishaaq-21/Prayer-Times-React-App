@@ -1,7 +1,8 @@
 import { createContext, useEffect, useMemo, useRef, useState } from "react";
 
-import { getPrayersTimes } from "./ApisResquests";
-import { notFoundError } from "./ApisResquests";
+import { getPrayersTimes } from "../components/Helpers/ApisResquests";
+import { notFoundError } from "../components/Helpers/ApisResquests";
+import { useTranslation } from "react-i18next";
 export const PrayersTimesContext = createContext({});
 export const MainBarInfoConext = createContext({});
 
@@ -12,6 +13,7 @@ const PrayersDataProvider = ({ children }) => {
   const [cityTimeString, setCityTimeString] = useState("");
   const lastCityName = useRef("");
 
+  const { t, i18n } = useTranslation();
   const fetchData = async (cityName) => {
     try {
       setIsLoading(true);
@@ -38,13 +40,14 @@ const PrayersDataProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    i18n.changeLanguage("en");
     lastCityName.current = "Makkah";
     fetchData("Makkah");
   }, []);
 
   return (
     <PrayersTimesContext.Provider
-      value={{ prayersTimes, error, isLoading, cityTimeString }}
+      value={{ prayersTimes, error, isLoading, cityTimeString, t }}
     >
       <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
         {children}

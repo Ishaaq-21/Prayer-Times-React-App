@@ -27,22 +27,19 @@ export default function MainBar() {
     isLoading,
     error,
     cityTimeString: initialCityTimeString,
+    t,
   } = useContext(PrayersTimesContext);
 
   const [cityCurrTime, setCityCurrTime] = useState(null);
   const [remainingTime, setRemainingTime] = useState("");
   const [nextPrayer, setNextPrayer] = useState(null);
   const [gettingTime, setGettingTime] = useState(null);
-  const { t, i18n } = useTranslation();
   const nextPrayerRef = useRef(null);
   const intervalId = useRef(0);
   function resetNextPrayer() {
     setNextPrayer(null);
     clearInterval(intervalId.current);
   }
-  useEffect(() => {
-    i18n.changeLanguage("ar");
-  }, []);
   useEffect(() => {
     nextPrayerRef.current = nextPrayer;
   }, [nextPrayer]);
@@ -82,7 +79,7 @@ export default function MainBar() {
   }, [initialCityTimeString, prayersTimes]);
 
   return (
-    <div className="my-8 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
+    <div className="my-8 lg:mt-5 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
       <SearchCompo resetNextPrayer={resetNextPrayer} t={t}></SearchCompo>
       <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
         <span className="text-secondary-500">{t("city")} </span>{" "}

@@ -12,7 +12,7 @@ export default function NextPrayerTime({
     <div className="md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl ">
       <p className="text-white mb-1 font-bold shadow-text tracking-wide leading-relaxed">
         <span className="text-accent-500">
-          {nextPrayer ? t(`${nextPrayer.prayerName}`) : "Next Prayer"}{" "}
+          {nextPrayer ? t(`${nextPrayer.prayerName}`) : t("nextPrayer")}{" "}
           {t("nextPrayerIn")}
         </span>{" "}
         {(gettingTime || isLoading) && (

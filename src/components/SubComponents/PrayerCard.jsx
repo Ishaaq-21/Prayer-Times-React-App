@@ -6,7 +6,7 @@ import MaghribIcon from "../../assets/prayersIcons/maghrib.svg";
 import IshaIcon from "../../assets/prayersIcons/Aisha.svg";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-export default function PrayerCard({ prayerName, prayerTime }) {
+export default function PrayerCard({ prayerName, prayerTime, t }) {
   const mapIcons = {
     Fajr: FajrIcon,
     Dhuhr: DhuhrIcon,
@@ -14,10 +14,7 @@ export default function PrayerCard({ prayerName, prayerTime }) {
     Maghrib: MaghribIcon,
     Isha: IshaIcon,
   };
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    i18n.changeLanguage("ar");
-  }, []);
+
   return (
     <>
       <div className="prayer-card bg-black/30 backdrop-blur-lg border-2 rounded-3xl border-amber-400/30 w-11/12 relative overflow-hidden text-center py-2 px-5">

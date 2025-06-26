@@ -6,8 +6,8 @@ export default {
       center: true,
       screens: {
         sm: "640px",
-        md: "768px", // Currently stops here
-        lg: "1024px", // Not being applied
+        md: "768px",
+        lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
       },

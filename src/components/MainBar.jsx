@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import SearchCompo from "./SubComponents/SearchCompo";
+import SearchCompo from "./SubComponents/mainBarSubComponents/SearchCompo";
 import {
   MainBarInfoConext,
   PrayersTimesContext,
@@ -12,8 +12,9 @@ import {
   handleFinalRemainingTimesInterval,
 } from "./Helpers/dateLogic";
 import { ThreeDot } from "react-loading-indicators";
-import CityTime from "./SubComponents/CityTime";
-import NextPrayerTime from "./SubComponents/NextPrayerTime";
+import CityTime from "./SubComponents/mainBarSubComponents/CityTime";
+import NextPrayerTime from "./SubComponents/mainBarSubComponents/NextPrayerTime";
+import { useTranslation } from "react-i18next";
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
@@ -32,12 +33,16 @@ export default function MainBar() {
   const [remainingTime, setRemainingTime] = useState("");
   const [nextPrayer, setNextPrayer] = useState(null);
   const [gettingTime, setGettingTime] = useState(null);
+  const { t, i18n } = useTranslation();
   const nextPrayerRef = useRef(null);
   const intervalId = useRef(0);
   function resetNextPrayer() {
     setNextPrayer(null);
     clearInterval(intervalId.current);
   }
+  useEffect(() => {
+    i18n.changeLanguage("ar");
+  }, []);
   useEffect(() => {
     nextPrayerRef.current = nextPrayer;
   }, [nextPrayer]);
@@ -78,9 +83,9 @@ export default function MainBar() {
 
   return (
     <div className="my-8 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
-      <SearchCompo resetNextPrayer={resetNextPrayer}></SearchCompo>
+      <SearchCompo resetNextPrayer={resetNextPrayer} t={t}></SearchCompo>
       <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
-        <span className="text-secondary-500">City : </span>{" "}
+        <span className="text-secondary-500">{t("city")} </span>{" "}
         {isLoading ? (
           <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
         ) : !error ? (
@@ -93,6 +98,7 @@ export default function MainBar() {
         isLoading={isLoading}
         error={error}
         cityCurrTime={cityCurrTime}
+        t={t}
       />
       <NextPrayerTime
         nextPrayer={nextPrayer}
@@ -100,6 +106,7 @@ export default function MainBar() {
         isLoading={isLoading}
         error={error}
         remainingTime={remainingTime}
+        t={t}
       />
     </div>
   );

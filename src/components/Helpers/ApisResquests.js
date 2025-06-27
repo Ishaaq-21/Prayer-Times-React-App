@@ -59,6 +59,7 @@ const getPrayersTimesFromApi = async (
     const cityPrayerData = cityPrayersResp.data;
     if (!cityPrayerData) throw new Error("Failed to fetch prayers data");
     const prayersTiming = cityPrayerData.data.timings;
+    console.log(prayersTiming);
     const prayerTimingArr = [
       { id: 1, prayerName: "Fajr", time: prayersTiming.Fajr },
       { id: 2, prayerName: "Dhuhr", time: prayersTiming.Dhuhr },
@@ -76,6 +77,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this 
 
 export const getPrayersTimes = async (cityName) => {
   try {
+    await sleep(1);
     // await sleep(5000);
     const cityLocationData = await getCityLocationData(cityName);
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)
@@ -83,6 +85,11 @@ export const getPrayersTimes = async (cityName) => {
       prayerCalculationMethodsByCountry[cityLocationData.country] ||
       prayerCalculationMethodsByCountry["default"];
     // await getTimeOfCity(cityLocationData.latitude, cityLocationData.longitude);
+
+    console.log("Searched city country : -> " + cityLocationData.country);
+    console.log("Searched country method code : -> " + countryMethodCode);
+    console.log("searched city latittude : -> " + cityLocationData.latitude);
+    console.log("searched city longitude : -> " + cityLocationData.longitude);
     const searchedCityTimeString = await getTimeOfCity(
       cityLocationData.latitude,
       cityLocationData.longitude

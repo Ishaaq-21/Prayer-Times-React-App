@@ -88,7 +88,7 @@ export default function MainBar() {
         ) : !error ? (
           lastCityName.current
         ) : (
-          "Unknown"
+          t("unknown")
         )}
       </p>
       <CityTime

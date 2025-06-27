@@ -13,7 +13,7 @@ const PrayersDataProvider = ({ children }) => {
   const [cityTimeString, setCityTimeString] = useState("");
   const lastCityName = useRef("");
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const fetchData = async (cityName) => {
     try {
       setIsLoading(true);
@@ -34,6 +34,7 @@ const PrayersDataProvider = ({ children }) => {
   };
   // I need to work on translation then move to the logic
   function handleSearchClick(cityNameInput) {
+    if (lastCityName.current === cityNameInput) return;
     lastCityName.current = cityNameInput;
 
     fetchData(cityNameInput);

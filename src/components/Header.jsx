@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./SubComponents/ToggleLanguage";
+import { useContext } from "react";
+import { PrayersTimesContext } from "../contexts/PrayersTimesProvider";
 
 export default function Header() {
-  const { t } = useTranslation();
+  const { t } = useContext(PrayersTimesContext);
 
   return (
     <>

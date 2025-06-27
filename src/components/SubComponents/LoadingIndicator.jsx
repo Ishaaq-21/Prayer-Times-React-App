@@ -1,6 +1,5 @@
 import crescentIcon from "../../assets/crescentIcon.svg";
-
-const LoadeingIndicator = () => {
+const LoadeingIndicator = ({ t }) => {
   return (
     <div className="w-full col-span-full max-w-4xl  bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl flex items-center justify-center p-8 shadow-lg">
       <div className="text-center flex flex-col items-center">
@@ -13,10 +12,10 @@ const LoadeingIndicator = () => {
         </div>
 
         <h2 className="text-2xl font-semibold text-slate-200 tracking-wide">
-          Loading Prayer Times...
+          {t("loadingPrayerTimes")}
         </h2>
 
-        <p className="mt-2 text-slate-400 max-w-sm">Please wait a moment.</p>
+        <p className="mt-2 text-slate-400 max-w-sm">{t("pleaseWait")}</p>
       </div>
     </div>
   );

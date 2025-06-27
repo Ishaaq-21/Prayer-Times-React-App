@@ -58,3 +58,10 @@ body {
 .animate-calm-pulse {
   animation: calm-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/*Ive added this class since I had problems to apply the following styles with tailwind */
+@media (min-width: 1024px) {
+  .city-time {
+    order: 0 !important;
+  }
+}

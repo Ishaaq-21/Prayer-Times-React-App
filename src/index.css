@@ -9,6 +9,14 @@
   .text-fill-transparent {
     -webkit-text-fill-color: transparent;
   }
+  @media (min-width: 768px) and (max-width: 880px) {
+    .tablet-buttons {
+      @apply px-3 py-1  text-xs !important;
+    }
+    .tablet-buttons-container {
+      @apply left-2 !important;
+    }
+  }
 }
 
 * {

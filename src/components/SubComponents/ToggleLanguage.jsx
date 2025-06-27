@@ -31,13 +31,13 @@ const LanguageToggle = () => {
       />
 
       <div
-        className={`${showToggle ? "top-8 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-3000 md:top-11 md:left-8`}
+        className={`${showToggle ? "top-8 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-3000 md:top-11 md:left-8 tablet-buttons-container  `}
       >
         <div className="inline-flex flex-col md:flex-row bg-black/20 rounded-full overflow-hidden border border-white/20 backdrop-blur-md p-1">
           {/* English Button */}
           <button
             onClick={() => handleLangChange("en")}
-            className={`px-2 py-[10px] md:px-5 md:py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-300
+            className={`px-2 py-[10px] md:px-5 md:py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-300 tablet-buttons
                         ${
                           activeLang === "en"
                             ? "bg-[#FFC107] text-[#1e3a5f] shadow-[0_0_15px_rgba(255,193,7,0.5)]"
@@ -51,7 +51,7 @@ const LanguageToggle = () => {
           {/* Arabic Button */}
           <button
             onClick={() => handleLangChange("ar")}
-            className={`px-1 py-[10px] md:px-5 md:py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-300
+            className={`px-1 py-[10px] md:px-5 md:py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-300 tablet-buttons
                         ${
                           activeLang === "ar"
                             ? "bg-[#FFC107] text-[#1e3a5f] shadow-[0_0_15px_rgba(255,193,7,0.5)]"

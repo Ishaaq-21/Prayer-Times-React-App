@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 
 const LanguageToggle = () => {
-  const [activeLang, setActiveLang] = useState("en");
+  const { activeLang, setActiveLang } = useContext(PrayersTimesContext);
   const [showToggle, setShowToggle] = useState(false);
   const timeOutRef = useRef();
-  const { i18n } = useTranslation();
 
   const startHideTimer = () => {
     if (timeOutRef.current) clearTimeout(timeOutRef.current);
@@ -18,9 +17,6 @@ const LanguageToggle = () => {
     setActiveLang(lang);
     startHideTimer();
   };
-  useEffect(() => {
-    i18n.changeLanguage(activeLang);
-  }, [activeLang]);
 
   return (
     <>

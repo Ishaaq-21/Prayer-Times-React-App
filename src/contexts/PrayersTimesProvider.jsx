@@ -7,13 +7,17 @@ export const PrayersTimesContext = createContext({});
 export const MainBarInfoConext = createContext({});
 
 const PrayersDataProvider = ({ children }) => {
+  //statues
   const [error, setError] = useState(null);
   const [prayersTimes, setPrayersTimes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cityTimeString, setCityTimeString] = useState("");
+
+  const [activeLang, setActiveLang] = useState("en");
+
   const lastCityName = useRef("");
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const fetchData = async (cityName) => {
     try {
       setIsLoading(true);
@@ -32,7 +36,10 @@ const PrayersDataProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
-  // I need to work on translation then move to the logic
+  useEffect(() => {
+    i18n.changeLanguage(activeLang);
+  }, [activeLang]);
+
   function handleSearchClick(cityNameInput) {
     if (lastCityName.current === cityNameInput) return;
     lastCityName.current = cityNameInput;
@@ -47,7 +54,15 @@ const PrayersDataProvider = ({ children }) => {
 
   return (
     <PrayersTimesContext.Provider
-      value={{ prayersTimes, error, isLoading, cityTimeString, t }}
+      value={{
+        prayersTimes,
+        error,
+        isLoading,
+        cityTimeString,
+        t,
+        setActiveLang,
+        activeLang,
+      }}
     >
       <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
         {children}

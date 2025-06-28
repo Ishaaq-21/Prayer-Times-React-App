@@ -5,7 +5,8 @@ import NoResult from "./SubComponents/NoResult";
 import LoadeingIndicator from "./SubComponents/LoadingIndicator";
 
 export default function FivePrayers() {
-  const { error, prayersTimes, isLoading, t } = useContext(PrayersTimesContext);
+  const { error, prayersTimes, isLoading, t, activeLang } =
+    useContext(PrayersTimesContext);
 
   let PrayerCardsList = [];
   if (prayersTimes) {
@@ -13,7 +14,13 @@ export default function FivePrayers() {
       return (
         <PrayerCard
           key={prayer.id}
-          className={index === 4 ? "col-span-full sm:col-span-1" : ""}
+          className={
+            prayer.prayerName === "Fajr"
+              ? "order-4"
+              : prayer.prayerName === "Isha"
+                ? "order-0"
+                : ""
+          }
           prayerName={prayer.prayerName}
           prayerTime={prayer.time}
           t={t}
@@ -22,7 +29,9 @@ export default function FivePrayers() {
     });
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center">
+    <div
+      className={`flex flex-wrap justify-center gap-4 ${activeLang === "ar" ? "flex-row-reverse" : ""}`}
+    >
       {isLoading && <LoadeingIndicator t={t} />}
       {error && <NoResult message={error} t={t} />}
       {!error && !isLoading && PrayerCardsList}

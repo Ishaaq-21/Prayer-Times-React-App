@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 export default function NoResult({ message, t }) {
   return (

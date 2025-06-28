@@ -5,7 +5,7 @@
   "search": "Search",
   "searchPlaceholder": "Search for a city...",
   "city": "City:",
-  "time": "Time",
+  "time": "Time :",
   "unknown": "Unknown",
   "nextPrayer": "Next Prayer",
   "nextPrayerIn": "In:",
@@ -19,5 +19,6 @@
   "Dhuhr": "Dhuhr",
   "Asr": "Asr",
   "Maghrib": "Maghrib",
-  "Isha": "Isha"
+  "Isha": "Isha",
+  "Makkah": "Makkah"
 }

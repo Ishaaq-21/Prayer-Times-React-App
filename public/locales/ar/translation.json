@@ -5,7 +5,7 @@
   "search": "بحث",
   "searchPlaceholder": "ابحث عن مدينة....",
   "city": "المدينة:",
-  "time": "الوقت ",
+  "time": "الوقت :  ",
   "unknown": "غير معروف",
   "nextPrayer": "الصلاة التالية",
   "nextPrayerIn": "بعد :",
@@ -19,5 +19,6 @@
   "Dhuhr": "الظهر",
   "Asr": "العصر",
   "Maghrib": "المغرب",
-  "Isha": "العشاء"
+  "Isha": "العشاء",
+  "Makkah": "مكة المكرمة"
 }

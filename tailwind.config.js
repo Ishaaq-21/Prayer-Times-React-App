@@ -1,3 +1,4 @@
+import tailwindcssTextshadow from "tailwindcss-textshadow";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
@@ -36,7 +37,12 @@ export default {
         dark: "#0f172a",
         light: "#f9fafb",
       },
+      textShadow: {
+        sm: "1px 1px 2px rgba(0,0,0,0.25)",
+        DEFAULT: "2px 2px 4px rgba(0,0,0,0.25)",
+        lg: "4px 4px 8px rgba(0,0,0)",
+      },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssTextshadow],
 };

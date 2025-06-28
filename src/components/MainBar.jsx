@@ -7,27 +7,23 @@ import {
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import {
-  getNextPrayer,
-  handleFinalRemainingTimesInterval,
-} from "./Helpers/dateLogic";
+import { handleFinalRemainingTimesInterval } from "./Helpers/dateLogic";
 import { ThreeDot } from "react-loading-indicators";
 import CityTime from "./SubComponents/mainBarSubComponents/CityTime";
 import NextPrayerTime from "./SubComponents/mainBarSubComponents/NextPrayerTime";
-import { useTranslation } from "react-i18next";
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
 /*Start Compoenent */
-//Main compo
 export default function MainBar() {
-  const { lastCityName } = useContext(MainBarInfoConext);
   const {
     prayersTimes,
     isLoading,
     error,
     cityTimeString: initialCityTimeString,
     t,
+    activeLang,
+    lastCityName,
   } = useContext(PrayersTimesContext);
 
   const [cityCurrTime, setCityCurrTime] = useState(null);
@@ -70,7 +66,6 @@ export default function MainBar() {
         setGettingTime(false);
         return newTime;
       });
-      //the remaining time is not updating
     }, 1000);
 
     return () => {
@@ -80,13 +75,25 @@ export default function MainBar() {
 
   return (
     <div className="my-8 lg:mt-5 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
-      <SearchCompo resetNextPrayer={resetNextPrayer} t={t}></SearchCompo>
-      <p className="text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1">
+      <SearchCompo
+        resetNextPrayer={resetNextPrayer}
+        t={t}
+        activeLang={activeLang}
+      ></SearchCompo>
+      <p
+        dir={activeLang === "en" ? "ltr" : "rtl"}
+        className={`${activeLang == "ar" ? "sm:order-0 md:order-0 lg:order-1" : "md:order-0 lg:order-1"}  text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1`}
+      >
         <span className="text-secondary-500">{t("city")} </span>{" "}
         {isLoading ? (
           <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
         ) : !error ? (
-          lastCityName.current
+          lastCityName.current === "Makkah" ||
+          lastCityName.current === "مكة" ? (
+            t("Makkah")
+          ) : (
+            lastCityName.current
+          )
         ) : (
           t("unknown")
         )}
@@ -96,6 +103,7 @@ export default function MainBar() {
         error={error}
         cityCurrTime={cityCurrTime}
         t={t}
+        activeLang={activeLang}
       />
       <NextPrayerTime
         nextPrayer={nextPrayer}
@@ -104,6 +112,7 @@ export default function MainBar() {
         error={error}
         remainingTime={remainingTime}
         t={t}
+        activeLang={activeLang}
       />
     </div>
   );

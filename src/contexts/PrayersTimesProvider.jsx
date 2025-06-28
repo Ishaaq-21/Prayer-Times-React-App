@@ -62,11 +62,11 @@ const PrayersDataProvider = ({ children }) => {
         t,
         setActiveLang,
         activeLang,
+        handleSearchClick,
+        lastCityName,
       }}
     >
-      <MainBarInfoConext.Provider value={{ handleSearchClick, lastCityName }}>
-        {children}
-      </MainBarInfoConext.Provider>
+      {children}
     </PrayersTimesContext.Provider>
   );
 };

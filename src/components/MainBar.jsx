@@ -74,7 +74,7 @@ export default function MainBar() {
   }, [initialCityTimeString, prayersTimes]);
 
   return (
-    <div className="my-8 lg:mt-5 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
+    <div className="my-8 lg:mt-5 2xl:my-10 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
       <SearchCompo
         resetNextPrayer={resetNextPrayer}
         t={t}
@@ -82,7 +82,7 @@ export default function MainBar() {
       ></SearchCompo>
       <p
         dir={activeLang === "en" ? "ltr" : "rtl"}
-        className={`${activeLang == "ar" ? "sm:order-0 md:order-0 lg:order-1" : "md:order-0 lg:order-1"}  text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1`}
+        className={`${activeLang == "ar" ? "sm:order-0 md:order-0 lg:order-1" : "md:order-0 lg:order-1"}  text-white text-3xl 2xl:text-5xl font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1`}
       >
         <span className="title-shadow text-accent-500">{t("city")} </span>{" "}
         {isLoading ? (

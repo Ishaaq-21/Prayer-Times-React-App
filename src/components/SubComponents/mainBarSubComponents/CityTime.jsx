@@ -10,7 +10,7 @@ export default function CityTime({
   return (
     <div
       dir={activeLang === "en" ? "ltr" : "rtl"}
-      className={`${activeLang == "ar" ? "sm:order-3 md:order-3 city-time" : "lg:order-2"}  text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  `}
+      className={`${activeLang == "ar" ? "sm:order-3 md:order-3 city-time" : "lg:order-2"}  text-white text-3xl  2xl:text-5xl font-bold text-center  shadow-text -mt-2 sm:mt-0  `}
     >
       <p
         className="title-shadow mb-1  font-bold text-shadow-[0_0_5px_black]

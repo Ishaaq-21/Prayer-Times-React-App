@@ -14,7 +14,7 @@ export default function NextPrayerTime({
       dir={`${activeLang === "ar" ? "rtl" : "ltr"}`}
       className={`${activeLang == "ar" ? "sm:order-2 md:order-2  lg:order-3" : "lg:order-3"} md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl`}
     >
-      <p className="text-white mb-1 font-bold shadow-text tracking-wide leading-relaxed">
+      <p className="title-shadow text-white mb-1 font-bold shadow-text tracking-wide leading-relaxed">
         <span className="text-accent-500">
           {nextPrayer ? t(`${nextPrayer.prayerName}`) : t("nextPrayer")}{" "}
           {t("nextPrayerIn")}

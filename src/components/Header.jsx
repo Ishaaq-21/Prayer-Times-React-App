@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <>
       <LanguageToggle />
-      <h1 className="text-center mt-3 mb-2 max-w-[250px] mx-auto sm:max-w-none  text-4xl md:text-5xl text-accent-500 shadow-text  font-bold">
+      <h1 className="title-shadow text-center mt-3 mb-2 max-w-[250px] mx-auto sm:max-w-none  text-4xl md:text-5xl text-secondary-500 text-shadow-lg  font-bold">
         {t("appTitle")}
       </h1>
       <blockquote

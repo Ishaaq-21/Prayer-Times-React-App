@@ -23,7 +23,7 @@ const SearchCompo = ({ resetNextPrayer, t, activeLang }) => {
         onChange={(e) => setInputCity(e.target.value)}
       />
       <button
-        className={`btn py-3 px-5  border-0 ${activeLang == "ar" ? "rounded-l-xl" : "rounded-r-xl"}  text-white text-base sm:text-sm md:text-base cursor-pointer font-bold bg-secondary-600 transition-all duration-300 ease-in-out hover:bg-secondary-700 sm:max-w-[80px] md:max-w-none`}
+        className={`btn py-3 px-5  border-0 ${activeLang == "ar" ? "rounded-l-xl" : "rounded-r-xl"}  text-white text-base sm:text-sm md:text-base cursor-pointer font-bold bg-accent-500 hover:bg-accent-600 transition-all duration-300 ease-in-out  sm:max-w-[80px] md:max-w-none`}
         onClick={handleSearchBtnClick}
       >
         {t("search")}

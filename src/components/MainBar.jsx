@@ -84,7 +84,7 @@ export default function MainBar() {
         dir={activeLang === "en" ? "ltr" : "rtl"}
         className={`${activeLang == "ar" ? "sm:order-0 md:order-0 lg:order-1" : "md:order-0 lg:order-1"}  text-white text-3xl  font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1`}
       >
-        <span className="text-secondary-500">{t("city")} </span>{" "}
+        <span className="title-shadow text-accent-500">{t("city")} </span>{" "}
         {isLoading ? (
           <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
         ) : !error ? (

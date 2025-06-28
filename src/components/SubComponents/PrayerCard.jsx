@@ -23,10 +23,10 @@ export default function PrayerCard({ prayerName, prayerTime, t }) {
           alt="Maghrib prayer icon"
         />
 
-        <p className="prayer-name text-amber-500 text-xl sm:text-4xl font-bold mb-5 mx-auto w-fit shadow-text">
+        <p className="prayer-name text-amber-500 text-3xl sm:text-4xl font-bold mb-5 mx-auto w-fit shadow-text">
           {t(`${prayerName}`)}
         </p>
-        <div className="prayer-time text-white text-lg sm:text-4xl my-4 mx-0 text-5xl font-bold">
+        <div className="prayer-time text-white text-3xl sm:text-4xl my-4 mx-0 lg:text-5xl font-bold">
           {prayerTime}
         </div>
       </div>

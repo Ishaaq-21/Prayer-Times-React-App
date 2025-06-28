@@ -12,7 +12,10 @@ export default function CityTime({
       dir={activeLang === "en" ? "ltr" : "rtl"}
       className={`${activeLang == "ar" ? "sm:order-3 md:order-3 city-time" : "lg:order-2"}  text-white text-3xl font-bold text-center  shadow-text -mt-2 sm:mt-0  `}
     >
-      <p className="mb-1  font-bold shadow-text text-secondary-500 inline-block tracking-wide leading-relaxed mr-3">
+      <p
+        className="title-shadow mb-1  font-bold text-shadow-[0_0_5px_black]
+ text-accent-500 inline-block tracking-wide leading-relaxed mr-3"
+      >
         {t("time")}
       </p>
       <p className="text-white text-center font-bold shadow-text inline">

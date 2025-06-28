@@ -27,7 +27,7 @@ const LanguageToggle = () => {
       />
 
       <div
-        className={`${showToggle ? "top-8 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-3000 md:top-6 md:left-8 tablet-buttons-container  `}
+        className={`${showToggle ? "top-6 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-3000 md:top-6 md:left-8 tablet-buttons-container  `}
       >
         <div className="inline-flex flex-col md:flex-row bg-black/20 rounded-full overflow-hidden border border-white/20 backdrop-blur-md p-1">
           {/* English Button */}
@@ -66,10 +66,10 @@ function LangButton({ showToggle, setShowToggle, startHideTimer }) {
   return (
     <button
       type="button"
-      className={`peer top-7 p-[5px] ${showToggle ? "hidden" : "block"} box-border border-2 border-white rounded-full bg-[#FFC107] block md:hidden 
+      className={`peer top-7 p-[5px] ${showToggle ? "hidden" : "block"} box-border border-2 border-white rounded-full bg-[#FFC107] block md:hidden shadow-[0_0_5px_5px_grey]
              hover:bg-[#DAA520] text-white 
-             shadow-[0_4px_12px_rgba(0,0,0,0.3)] 
-             hover:shadow-[0_6px_16px_rgba(0,0,0,0.35)] 
+             hover:!shadow-[0_0_5px_5px_#f17b4c] 
+            
              transition duration-300 
              focus:outline-none focus:ring-white absolute top-12`}
       aria-label="Select language"

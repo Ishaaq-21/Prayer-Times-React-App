@@ -26,6 +26,9 @@ export default function InputArea({ activeLang, handleClick, t, expand }) {
           <Icon name="send" className="w-5 h-5" />
         </button>
       </div>
+      <p className="w-fit mx-auto text-xs text-accent-500 mt-1">
+        This AI can make mistakes, so double-check it{" "}
+      </p>
     </footer>
   );
 }

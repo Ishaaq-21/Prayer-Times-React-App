@@ -30,7 +30,7 @@ export default function FivePrayers() {
   }
   return (
     <div
-      className={`flex flex-wrap justify-center gap-4 ${activeLang === "ar" ? "flex-row-reverse" : ""}`}
+      className={`flex pb-10 flex-wrap justify-center gap-4 ${activeLang === "ar" ? "flex-row-reverse" : ""}`}
     >
       {isLoading && <LoadeingIndicator t={t} />}
       {error && <NoResult message={error} t={t} />}

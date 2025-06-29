@@ -12,7 +12,7 @@ export const Icon = ({ name, className }) => {
         viewBox="0 0 24 24"
         fill="currentColor"
       >
-        <path d="M12 2.25c-5.376 0-9.75 4.374-9.75 9.75s4.374 9.75 9.75 9.75 9.75-4.374 9.75-9.75S17.376 2.25 12 2.25zm4.834 13.352c-.375.375-1.025.466-1.49.196-1.425-.825-3.525-.825-4.95 0-.465.27-1.115.18-1.49-.196-.375-.375-.466-1.025-.196-1.49.825-1.425.825-3.525 0-4.95-.27-.465-.18-1.115.196-1.49.375-.375 1.025-.466 1.49-.196 1.425.825 3.525.825 4.95 0 .465.27 1.115.18 1.49.196.375.375.466 1.025.196 1.49-.825 1.425-.825 3.525 0 4.95z" />
+        <path d="M12,3 A2,2 0 1 1 12,7 A1.5,1.5 0 0 0 12,3 Z M3,22 V10 A1,1 0 0 1 5,10 V22 Z M19,22 V10 A1,1 0 0 1 21,10 V22 Z M6,22 V12 A6,6 0 0 1 18,12 V22 Z M9.5,17 A2.5,2.5 0 0 1 14.5,17 L14.5,22 L9.5,22 L9.5,17 Z" />
       </svg>
     ),
     send: (
@@ -71,12 +71,13 @@ export default function ChatBotApp() {
   ]);
 
   function handleSendMessageClick(inputMsg) {
+    if (inputMsg.trim() === "") return;
     setVirtualMessages((prev) => [...prev, { sender: "user", text: inputMsg }]);
   }
 
   return (
     <div
-      className={`w-full max-w-sm max-h-[450px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} right-[20px] transition-all duration-3000`}
+      className={`w-full max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} right-[20px] transition-all duration-3000`}
     >
       {/* Chat Header */}
       <header
@@ -92,7 +93,13 @@ export default function ChatBotApp() {
       </header>
 
       {/* Chat History (Scrollable) */}
-      <div className={`${expand ? "block" : "hidden"} flex-1`}>
+      <div
+        className={`
+    overflow-hidden transition-all duration-500
+    ${expand ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}
+    flex-1
+  `}
+      >
         <div className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}>
           {visualMessages.map((msg, index) => (
             <MessageBubble

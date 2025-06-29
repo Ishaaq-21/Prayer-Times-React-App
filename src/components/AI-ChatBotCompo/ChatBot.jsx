@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
+import InputArea from "./InputArea";
 
 // Helper component for Icons
-const Icon = ({ name, className }) => {
+export const Icon = ({ name, className }) => {
   const icons = {
     bot: (
       <svg
@@ -54,7 +55,7 @@ export default function ChatBotApp() {
 
   const [expand, setExpand] = useState(false);
   const { t, activeLang } = useContext(PrayersTimesContext);
-  const visualMessages = [
+  const [visualMessages, setVirtualMessages] = useState([
     {
       sender: "bot",
       text: "Assalamu alaikum! How can I assist you with your query?",
@@ -67,11 +68,15 @@ export default function ChatBotApp() {
       sender: "bot",
       text: "Of course. Please provide the details, and I will do my best to find the information you seek.",
     },
-  ];
+  ]);
+
+  function handleSendMessageClick(inputMsg) {
+    setVirtualMessages((prev) => [...prev, { sender: "user", text: inputMsg }]);
+  }
 
   return (
     <div
-      className={`w-full max-w-sm max-h-[450px] flex flex-col bg-[#3a2927] rounded-2xl shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-96"} right-[20px] transition-all duration-3000`}
+      className={`w-full max-w-sm max-h-[450px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} right-[20px] transition-all duration-3000`}
     >
       {/* Chat Header */}
       <header
@@ -87,35 +92,25 @@ export default function ChatBotApp() {
       </header>
 
       {/* Chat History (Scrollable) */}
-      <div className="flex-1 p-6 overflow-y-auto space-y-6">
-        {visualMessages.map((msg, index) => (
-          <MessageBubble
-            key={index}
-            sender={msg.sender}
-            text={msg.text}
-            activeLang={activeLang}
-          />
-        ))}
-      </div>
-
-      {/* Input Area (Visual Only) */}
-      <footer className="p-4 border-t border-gray-700 flex-shrink-0">
-        <div
-          className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} items-center gap-2 bg-gray-700/50 rounded-xl p-2`}
-        >
-          <input
-            dir={activeLang === "ar" ? "rtl" : "ltr"}
-            type="text"
-            placeholder={t("askAiPlaceHolder")}
-            className="flex-1 bg-transparent text-gray-200 placeholder-gray-500 focus:outline-none px-2"
-          />
-          <button
-            className={`p-2.5 rounded-full ${activeLang === "ar" ? "transform rotate-180" : ""}  bg-gradient-to-r from-orange-500 to-amber-500 text-white cursor-pointer`}
-          >
-            <Icon name="send" className="w-5 h-5" />
-          </button>
+      <div className={`${expand ? "block" : "hidden"} flex-1`}>
+        <div className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}>
+          {visualMessages.map((msg, index) => (
+            <MessageBubble
+              key={index}
+              sender={msg.sender}
+              text={msg.text}
+              activeLang={activeLang}
+            />
+          ))}
         </div>
-      </footer>
+        <InputArea
+          activeLang={activeLang}
+          handleClick={handleSendMessageClick}
+          t={t}
+          expand={expand}
+        />
+        {/* Input Area (Visual Only) */}
+      </div>
     </div>
   );
 }

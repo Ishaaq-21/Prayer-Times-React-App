@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Icon } from "./ChatBot";
 
-export default function InputArea({ activeLang, handleClick, t, expand }) {
+export default function InputArea({ activeLang, handleClick, t }) {
   const [input, setInput] = useState("");
   return (
     <footer className={`p-4 border-t border-gray-700 flex-shrink-0`}>

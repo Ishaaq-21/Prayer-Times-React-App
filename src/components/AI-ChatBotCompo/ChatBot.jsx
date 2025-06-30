@@ -104,7 +104,9 @@ export default function ChatBotApp() {
           className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer bg-[#5c3f3c]`}
           onClick={() => !expand && setExpand(true)}
         >
-          <div className="flex flex-1 self-start gap-4">
+          <div
+            className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} flex-1 self-start gap-4`}
+          >
             <Icon
               name="bot"
               className="w-9 h-9 text-amber-500"

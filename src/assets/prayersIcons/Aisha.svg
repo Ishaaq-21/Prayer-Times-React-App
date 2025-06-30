@@ -1,61 +1,69 @@
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Moon with radiating moonbeams -->
+  <!-- Comment: The whole icon is designed with darker, more vibrant purple and blue tones. Size has been increased. -->
+
+  <!-- Moon with radiating moonbeams - colors are darker and more opaque -->
   <g transform="translate(50,45)">
     <!-- Long moonbeams -->
-    <line x1="0" y1="-30" x2="0" y2="-22" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="21" y1="-21" x2="15" y2="-15" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="30" y1="0" x2="22" y2="0" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="21" y1="21" x2="15" y2="15" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="0" y1="30" x2="0" y2="22" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="-21" y1="21" x2="-15" y2="15" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="-30" y1="0" x2="-22" y2="0" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
-    <line x1="-21" y1="-21" x2="-15" y2="-15" stroke="#c7b6e8" stroke-width="2.5" opacity="0.7"/>
+    <line x1="0" y1="-36" x2="0" y2="-26.4" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="25.2" y1="-25.2" x2="18" y2="-18" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="36" y1="0" x2="26.4" y2="0" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="25.2" y1="25.2" x2="18" y2="18" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="0" y1="36" x2="0" y2="26.4" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-25.2" y1="25.2" x2="-18" y2="18" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-36" y1="0" x2="-26.4" y2="0" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
+    <line x1="-25.2" y1="-25.2" x2="-18" y2="-18" stroke="#9467bd" stroke-width="2.5" opacity="0.8"/>
     
     <!-- Shorter moonbeams -->
-    <line x1="15" y1="-27" x2="11" y2="-20" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="25" y1="-15" x2="18" y2="-11" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="25" y1="15" x2="18" y2="11" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="15" y1="27" x2="11" y2="20" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="-15" y1="27" x2="-11" y2="20" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="-25" y1="15" x2="-18" y2="11" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="-25" y1="-15" x2="-18" y2="-11" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
-    <line x1="-15" y1="-27" x2="-11" y2="-20" stroke="#c7b6e8" stroke-width="1.5" opacity="0.6"/>
+    <line x1="18" y1="-32.4" x2="13.2" y2="-24" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="30" y1="-18" x2="21.6" y2="-13.2" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="30" y1="18" x2="21.6" y2="13.2" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="18" y1="32.4" x2="13.2" y2="24" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="-18" y1="32.4" x2="-13.2" y2="24" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="-30" y1="18" x2="-21.6" y2="13.2" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="-30" y1="-18" x2="-21.6" y2="-13.2" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
+    <line x1="-18" y1="-32.4" x2="-13.2" y2="-24" stroke="#9467bd" stroke-width="1.8" opacity="0.7"/>
   </g>
   
-  <!-- Central moon - darker colors -->
-  <circle cx="50" cy="45" r="15" fill="#6a5acd" opacity="0.9"/>
-  <circle cx="50" cy="45" r="10" fill="#c7b6e8" opacity="0.8"/>
+  <!-- Central moon - now with a dark base, a radial gradient for glow, and a highlight -->
+  <circle cx="50" cy="45" r="18" fill="#483d8b" opacity="1"/>
+  <radialGradient id="moonGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" style="stop-color:#e0e0ff;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#6a5acd;stop-opacity:0.9" />
+  </radialGradient>
+  <circle cx="50" cy="45" r="15.6" fill="url(#moonGradient)" opacity="1"/>
+  <circle cx="53.6" cy="39" r="4.8" fill="#e0e0ff" opacity="0.6"/> <!-- Specular highlight for 3D effect -->
   
-  <!-- Moon craters - darker color -->
-  <circle cx="48" cy="43" r="1.8" fill="#9370db" opacity="0.7"/>
-  <circle cx="53" cy="47" r="1.2" fill="#9370db" opacity="0.7"/>
-  <circle cx="51" cy="42" r="1" fill="#9370db" opacity="0.6"/>
-  
-  <!-- Scattered stars -->
-  <g fill="#ffffff" opacity="0.7">
+  <!-- Moon craters - darker color and more variation for detail -->
+  <circle cx="46.4" cy="41.4" r="2.6" fill="#6950a1" opacity="0.8"/>
+  <circle cx="56" cy="48.6" r="1.8" fill="#6950a1" opacity="0.8"/>
+  <circle cx="50" cy="40.2" r="1.6" fill="#6950a1" opacity="0.7"/>
+  <circle cx="44" cy="48.6" r="1.2" fill="#6950a1" opacity="0.7"/>
+
+  <!-- Scattered stars - brighter and slightly larger for better visibility -->
+  <g fill="#ffffff" opacity="0.8">
     <!-- Star 1 -->
     <g transform="translate(25,25)">
-      <line x1="-3" y1="0" x2="3" y2="0" stroke="#ffffff" stroke-width="1"/>
-      <line x1="0" y1="-3" x2="0" y2="3" stroke="#ffffff" stroke-width="1"/>
+      <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#ffffff" stroke-width="1.2"/>
+      <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#ffffff" stroke-width="1.2"/>
     </g>
     <!-- Star 2 -->
     <g transform="translate(75,30)">
-      <line x1="-2" y1="0" x2="2" y2="0" stroke="#ffffff" stroke-width="0.8"/>
-      <line x1="0" y1="-2" x2="0" y2="2" stroke="#ffffff" stroke-width="0.8"/>
+      <line x1="-2.3" y1="0" x2="2.3" y2="0" stroke="#ffffff" stroke-width="1"/>
+      <line x1="0" y1="-2.3" x2="0" y2="2.3" stroke="#ffffff" stroke-width="1"/>
     </g>
     <!-- Star 3 -->
     <g transform="translate(20,65)">
-      <line x1="-2.5" y1="0" x2="2.5" y2="0" stroke="#ffffff" stroke-width="0.9"/>
-      <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="#ffffff" stroke-width="0.9"/>
+      <line x1="-2.8" y1="0" x2="2.8" y2="0" stroke="#ffffff" stroke-width="1.1"/>
+      <line x1="0" y1="-2.8" x2="0" y2="2.8" stroke="#ffffff" stroke-width="1.1"/>
     </g>
     <!-- Star 4 -->
     <g transform="translate(80,70)">
-      <line x1="-2" y1="0" x2="2" y2="0" stroke="#ffffff" stroke-width="0.7"/>
-      <line x1="0" y1="-2" x2="0" y2="2" stroke="#ffffff" stroke-width="0.7"/>
+      <line x1="-2.2" y1="0" x2="2.2" y2="0" stroke="#ffffff" stroke-width="0.9"/>
+      <line x1="0" y1="-2.2" x2="0" y2="2.2" stroke="#ffffff" stroke-width="0.9"/>
     </g>
     <!-- Small twinkling stars -->
-    <circle cx="35" cy="75" r="0.8" fill="#ffffff" opacity="0.8"/>
-    <circle cx="65" cy="80" r="0.6" fill="#ffffff" opacity="0.7"/>
-    <circle cx="85" cy="50" r="0.7" fill="#ffffff" opacity="0.8"/>
+    <circle cx="35" cy="75" r="1" fill="#ffffff" opacity="0.9"/>
+    <circle cx="65" cy="80" r="0.8" fill="#ffffff" opacity="0.8"/>
+    <circle cx="85" cy="50" r="0.9" fill="#ffffff" opacity="0.9"/>
   </g>
 </svg>

@@ -1,13 +1,14 @@
 import React, { act, useContext, useState } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 import InputArea from "./InputArea";
+import ChatBotToggleBtn from "./ChatBotToggleBtn";
 
 // Helper component for Icons
 export const Icon = ({ name, className, activeLang }) => {
   const icons = {
     bot: (
       <svg
-        className={`w-6 h-9 text-amber-500 ${activeLang === "en" ? "margin-[-5px_-5px_0px_5px]" : "margin-[-5px_5px_0px_-5px]"}`}
+        className={`w-6 h-9 text-amber-500 ${activeLang === "en" ? "mt-[-5px] mr-[-5px] mb-[0px] ml-[5px]" : "mt-[-5px] mr-[5px] mb-[0px] ml-[-5px]"}`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
@@ -90,54 +91,91 @@ export default function ChatBotApp() {
     if (inputMsg.trim() === "") return;
     setVirtualMessages((prev) => [...prev, { sender: "user", text: inputMsg }]);
   }
-
+  function handleChatBotToggleClick() {
+    setExpand((prev) => !prev);
+  }
   return (
-    <div
-      className={`w-full max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} transform left-1/2 -translate-x-1/2 lg:right-[25px] lg:left-auto lg:-translate-x-0 transition-all duration-3000 overflow-hidden`}
-    >
-      {/* Chat Header */}
-      <header
-        className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer bg-[#5c3f3c]`}
-        onClick={() => setExpand((prev) => !prev)}
-      >
-        <Icon
-          name="bot"
-          className="w-9 h-9 text-amber-500"
-          activeLang={activeLang}
-        />
-        <div>
-          <h1 className="text-lg font-semibold text-yellow-400">
-            {t("aiChatBot")}
-          </h1>
-        </div>
-      </header>
-
-      {/* Chat History (Scrollable) */}
+    <>
       <div
-        className={`
+        className={`w-full max-w-[320px] md:max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute ${expand ? "bottom-0" : "-bottom-12 lg:-bottom-0"} transform left-1/2 -translate-x-1/2 ${activeLang === "en" ? "sm:right-[25px] sm:left-auto sm:-translate-x-0" : "sm:left-[25px] sm:right-auto sm:-translate-x-0"} transition-all duration-3000 overflow-hidden`}
+      >
+        {/* Chat Header */}
+        <div
+          className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer bg-[#5c3f3c]`}
+          onClick={() => !expand && setExpand(true)}
+        >
+          <div className="flex flex-1 self-start gap-4">
+            <Icon
+              name="bot"
+              className="w-9 h-9 text-amber-500"
+              activeLang={activeLang}
+            />
+            <div>
+              <h1 className="text-lg font-semibold text-yellow-400">
+                {t("aiChatBot")}
+              </h1>
+            </div>
+          </div>
+          <div className="closeBtn-container mr-3">
+            <button
+              class="text-amber-500/60 hover:text-amber-500 hover:bg-white/10 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
+              onClick={() => expand && setExpand(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              <span class="sr-only">Close chat</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Chat History (Scrollable) */}
+        <div
+          className={`
     overflow-hidden transition-all duration-500
     ${expand ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}
     flex-1
   `}
-      >
-        <div className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}>
-          {visualMessages.map((msg, index) => (
-            <MessageBubble
-              key={index}
-              sender={msg.sender}
-              text={msg.text}
-              activeLang={activeLang}
-            />
-          ))}
+        >
+          <div className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}>
+            {visualMessages.map((msg, index) => (
+              <MessageBubble
+                key={index}
+                sender={msg.sender}
+                text={msg.text}
+                activeLang={activeLang}
+              />
+            ))}
+          </div>
+          {/**Chat Bot input area */}
+          <InputArea
+            activeLang={activeLang}
+            handleClick={handleSendMessageClick}
+            t={t}
+            expand={expand}
+          />
         </div>
-        <InputArea
-          activeLang={activeLang}
-          handleClick={handleSendMessageClick}
-          t={t}
-          expand={expand}
-        />
-        {/* Input Area (Visual Only) */}
       </div>
-    </div>
+      {/* 
+        Button visible only on small and medium screens (sm, md). 
+        Toggles the chatbot container on click for better mobile responsiveness.
+      */}
+      <ChatBotToggleBtn
+        activeLang={activeLang}
+        handleToggleClick={handleChatBotToggleClick}
+        expand={expand}
+      />
+    </>
   );
 }

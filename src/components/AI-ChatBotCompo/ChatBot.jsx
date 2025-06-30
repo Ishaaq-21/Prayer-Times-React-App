@@ -1,18 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { act, useContext, useState } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 import InputArea from "./InputArea";
 
 // Helper component for Icons
-export const Icon = ({ name, className }) => {
+export const Icon = ({ name, className, activeLang }) => {
   const icons = {
     bot: (
       <svg
-        className={className}
+        className={`w-6 h-9 text-amber-500 ${activeLang === "en" ? "margin-[-5px_-5px_0px_5px]" : "margin-[-5px_5px_0px_-5px]"}`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
       >
-        <path d="M12,3 A2,2 0 1 1 12,7 A1.5,1.5 0 0 0 12,3 Z M3,22 V10 A1,1 0 0 1 5,10 V22 Z M19,22 V10 A1,1 0 0 1 21,10 V22 Z M6,22 V12 A6,6 0 0 1 18,12 V22 Z M9.5,17 A2.5,2.5 0 0 1 14.5,17 L14.5,22 L9.5,22 L9.5,17 Z" />
+        <path d="M5,22 V14 A1,1 0 0 1 6,13 L18,13 A1,1 0 0 1 19,14 V22 Z" />
+
+        <path d="M8,13 A4,4 0 0 1 16,13 A4,3 0 0 1 8,13 Z" />
+
+        <path d="M12,6 A1,1 0 0 0 12.8,7.2 A0.6,0.6 0 0 1 12,7.2 A1,1 0 0 0 12,6 Z" />
+
+        <path d="M3,22 V8 A0.8,0.8 0 0 1 4.6,8 V22 Z" />
+        <path d="M3.3,8 A0.8,0.6 0 0 1 4.3,8 A0.8,0.6 0 0 1 3.3,8 Z" />
+
+        <path d="M19.4,22 V8 A0.8,0.8 0 0 1 21,8 V22 Z" />
+        <path d="M19.7,8 A0.8,0.6 0 0 1 20.7,8 A0.8,0.6 0 0 1 19.7,8 Z" />
+
+        <path d="M10,22 V18 A2,2 0 0 1 14,18 V22 Z" />
+        <path d="M10,18 A2,1.5 0 0 1 14,18 A2,1.5 0 0 1 10,18 Z" />
+
+        <path d="M7,19 A1,0.8 0 0 1 8,19 A1,0.8 0 0 1 7,19 Z" />
+        <path d="M16,19 A1,0.8 0 0 1 17,19 A1,0.8 0 0 1 16,19 Z" />
       </svg>
     ),
     send: (
@@ -77,14 +93,18 @@ export default function ChatBotApp() {
 
   return (
     <div
-      className={`w-full max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} right-[20px] transition-all duration-3000`}
+      className={`w-full max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 absolute ${expand ? "bottom-0" : "-bottom-0"} transform left-1/2 -translate-x-1/2 lg:right-[25px] lg:left-auto lg:-translate-x-0 transition-all duration-3000 overflow-hidden`}
     >
       {/* Chat Header */}
       <header
-        className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-1 border-b border-gray-700 flex-shrink-0 cursor-pointer`}
+        className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer bg-[#5c3f3c]`}
         onClick={() => setExpand((prev) => !prev)}
       >
-        <Icon name="bot" className="w-9 h-9 text-amber-500" />
+        <Icon
+          name="bot"
+          className="w-9 h-9 text-amber-500"
+          activeLang={activeLang}
+        />
         <div>
           <h1 className="text-lg font-semibold text-yellow-400">
             {t("aiChatBot")}

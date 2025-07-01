@@ -1,7 +1,12 @@
+/* inter font  */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* Cairo */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer utilities {
   .bg-gradient-45 {
     background-image: linear-gradient(45deg, #fff, #f0f0f0, #fff);

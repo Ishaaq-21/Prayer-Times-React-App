@@ -215,6 +215,7 @@ export default function ChatBotApp() {
                 activeLang={activeLang}
               />
             ))}
+            {isLoading && <TypeLoadingIndicator activeLang={activeLang} />}
           </div>
           {/**Chat Bot input area */}
           <InputArea

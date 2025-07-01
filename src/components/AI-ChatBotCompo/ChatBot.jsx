@@ -62,7 +62,7 @@ const MessageBubble = ({ sender, text, activeLang }) => {
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div className={`${baseBubbleStyles} ${isUser ? userStyles : botStyles}`}>
         <p
-          className="text-sm"
+          className="font-size[13px]"
           dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
         ></p>
       </div>

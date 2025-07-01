@@ -153,7 +153,7 @@ export default function ChatBotApp() {
   return (
     <>
       <div
-        className={`w-full max-w-[320px] md:max-w-sm max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute ${expand ? "bottom-0" : "-bottom-12 lg:-bottom-0"} transform left-1/2 -translate-x-1/2 ${activeLang === "en" ? "sm:right-[25px] sm:left-auto sm:-translate-x-0" : "sm:left-[25px] sm:right-auto sm:-translate-x-0"} transition-all duration-3000 overflow-hidden`}
+        className={`w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute ${expand ? "bottom-0" : "-bottom-12 lg:-bottom-0"} transform left-1/2 -translate-x-1/2 ${activeLang === "en" ? "sm:right-[25px] sm:left-auto sm:-translate-x-0" : "sm:left-[25px] sm:right-auto sm:-translate-x-0"} transition-all duration-3000 overflow-hidden`}
       >
         {/* Chat Header */}
         <div
@@ -176,20 +176,20 @@ export default function ChatBotApp() {
           </div>
           <div className="closeBtn-container mr-3">
             <button
-              class="text-amber-500/60 hover:text-amber-500 hover:bg-white/10 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
+              className="text-amber-500/60 hover:text-amber-500 hover:bg-white/10 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
               onClick={() => expand && setExpand(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="3"
+                strokeWidth="3"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>

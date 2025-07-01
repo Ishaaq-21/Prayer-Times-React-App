@@ -1,8 +1,9 @@
-import React, { act, useContext, useState } from "react";
+import React, { act, useContext, useEffect, useState } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 import InputArea from "./InputArea";
 import ChatBotToggleBtn from "./ChatBotToggleBtn";
-
+import { getResponseFromAI } from "./ChatBotHelpers/chatBotApiRequests";
+import "./ChatBotHelpers/chatTypeLoading.css";
 // Helper component for Icons
 export const Icon = ({ name, className, activeLang }) => {
   const icons = {
@@ -60,7 +61,26 @@ const MessageBubble = ({ sender, text, activeLang }) => {
   return (
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div className={`${baseBubbleStyles} ${isUser ? userStyles : botStyles}`}>
-        <p className="text-sm">{text}</p>
+        <p
+          className="text-sm"
+          dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
+        ></p>
+      </div>
+    </div>
+  );
+};
+
+const TypeLoadingIndicator = ({ activeLang }) => {
+  return (
+    <div
+      class={`typeLoading flex ${activeLang === "en" ? "justify-start" : "justify-end"}`}
+    >
+      <div
+        class={`bg-gray-700/80 p-3 rounded-lg ${activeLang === "en" ? " rounded-bl-none" : " rounded-br-none"} flex items-center space-x-2`}
+      >
+        <div class="dot dot-1 w-2 h-2 bg-gray-400 rounded-full"></div>
+        <div class="dot dot-2 w-2 h-2 bg-gray-400 rounded-full"></div>
+        <div class="dot dot-3 w-2 h-2 bg-gray-400 rounded-full"></div>
       </div>
     </div>
   );

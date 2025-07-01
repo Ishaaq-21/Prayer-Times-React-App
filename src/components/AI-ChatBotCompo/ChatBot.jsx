@@ -206,8 +206,11 @@ export default function ChatBotApp() {
     flex-1
   `}
         >
-          <div className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}>
-            {visualMessages.map((msg, index) => (
+          <div
+            className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}
+            ref={chatContainerRef}
+          >
+            {messages.map((msg, index) => (
               <MessageBubble
                 key={index}
                 sender={msg.sender}

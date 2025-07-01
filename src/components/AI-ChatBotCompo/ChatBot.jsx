@@ -92,18 +92,16 @@ export default function ChatBotApp() {
 
   const [expand, setExpand] = useState(false);
   const { t, activeLang } = useContext(PrayersTimesContext);
-  const [visualMessages, setVirtualMessages] = useState([
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const chatContainerRef = useState(null);
+  const [messages, setVirtualMessages] = useState([
     {
       sender: "bot",
-      text: "Assalamu alaikum! How can I assist you with your query?",
-    },
-    {
-      sender: "user",
-      text: "Wa alaikum assalam. I have a question about the Hadith.",
-    },
-    {
-      sender: "bot",
-      text: "Of course. Please provide the details, and I will do my best to find the information you seek.",
+      text: `السَّلامُ عَلَيْكُم وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ!
+      I’m your AI Islamic assistant, here to share beneficial reminders and guidance, in shā’ Allāh.
+      Please note: I cannot provide fatāwā. For questions like “Is it ḥalāl?” or “Can I...?”, kindly consult a trusted imam or scholar.
+      If you have any other questions, feel free to ask — I’m here to help, bi’idhni Allāh.`,
     },
   ]);
 

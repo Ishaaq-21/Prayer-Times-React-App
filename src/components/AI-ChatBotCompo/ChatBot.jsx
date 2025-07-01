@@ -98,12 +98,17 @@ export default function ChatBotApp() {
   const [messages, setVirtualMessages] = useState([
     {
       sender: "bot",
-      text: `السَّلامُ عَلَيْكُم وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ!
-      I’m your AI Islamic assistant, here to share beneficial reminders and guidance, in shā’ Allāh.
-      Please note: I cannot provide fatāwā. For questions like “Is it ḥalāl?” or “Can I...?”, kindly consult a trusted imam or scholar.
-      If you have any other questions, feel free to ask — I’m here to help, bi’idhni Allāh.`,
+      text: t("initialMsg"),
     },
   ]);
+  useEffect(() => {
+    setVirtualMessages([
+      {
+        sender: "bot",
+        text: t("initialMsg"),
+      },
+    ]);
+  }, [t, activeLang]);
 
   // async function sleepSendMsg() {
   //   setIsLoading(true);

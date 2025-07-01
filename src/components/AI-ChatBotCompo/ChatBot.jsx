@@ -105,9 +105,47 @@ export default function ChatBotApp() {
     },
   ]);
 
-  function handleSendMessageClick(inputMsg) {
+  // async function sleepSendMsg() {
+  //   setIsLoading(true);
+  //   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this just for debugging
+  //   await sleep(2000);
+  //   setIsLoading(false);
+  //   return "Hello how can I help you";
+  // }
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+  async function handleSendingMsgToChat(userMsg) {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const aiMsg = await getResponseFromAI(userMsg);
+
+      setIsLoading(false);
+      return aiMsg;
+    } catch (error) {
+      setError(error.message);
+
+      setIsLoading(false);
+    }
+  }
+  function addUserToChatHistory(userObj) {
+    setVirtualMessages((prev) => [...prev, userObj]);
+  }
+  async function handleSendMessageClick(inputMsg) {
     if (inputMsg.trim() === "") return;
-    setVirtualMessages((prev) => [...prev, { sender: "user", text: inputMsg }]);
+    const userObj = { sender: "user", text: inputMsg };
+    addUserToChatHistory(userObj);
+    let aiMsg = await handleSendingMsgToChat(inputMsg);
+    // let aiMsg = await sleepSendMsg();
+    const botMsg = { sender: "bot", text: aiMsg };
+
+    setVirtualMessages((prev) => [...prev, botMsg]);
   }
   function handleChatBotToggleClick() {
     setExpand((prev) => !prev);

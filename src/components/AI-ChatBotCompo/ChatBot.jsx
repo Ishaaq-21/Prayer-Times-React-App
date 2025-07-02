@@ -96,28 +96,27 @@ export default function ChatBotApp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const chatContainerRef = useState(null);
-  const [messages, setVirtualMessages] = useState([
-    {
-      sender: "bot",
-      text: t("initialMsg"),
-    },
-  ]);
-  useEffect(() => {
+  const [messages, setVirtualMessages] = useState([]);
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  async function initialBotMsg() {
+    setIsLoading(true);
+    setVirtualMessages([]);
+    await sleep(2000);
     setVirtualMessages([
       {
         sender: "bot",
         text: t("initialMsg"),
       },
     ]);
-  }, [t, activeLang]);
+    setIsLoading(false);
+  }
+  useEffect(() => {
+    if (expand) {
+      initialBotMsg();
+    }
+  }, []);
 
-  // async function sleepSendMsg() {
-  //   setIsLoading(true);
-  //   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this just for debugging
-  //   await sleep(2000);
-  //   setIsLoading(false);
-  //   return "Hello how can I help you";
-  // }
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
@@ -216,11 +215,21 @@ export default function ChatBotApp() {
             className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}
             ref={chatContainerRef}
           >
-            {messages.map((msg, index) => (
+            {messages &&
+              messages.map((msg, index) => (
+                <MessageBubble
+                  key={index}
+                  sender={msg.sender}
+                  text={msg.text}
+                  activeLang={activeLang}
+                />
+              ))}
+            {isLoading && <TypeLoadingIndicator activeLang={activeLang} />}
+            {error && (
               <MessageBubble
-                key={index}
-                sender={msg.sender}
-                text={msg.text}
+                key={1}
+                sender={"bot"}
+                text={error.message}
                 activeLang={activeLang}
               />
             ))}

@@ -175,10 +175,10 @@ export default function ChatBotApp() {
           <div
             className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} flex-1 self-start gap-4`}
           >
-            <Icon
-              name="bot"
-              className="w-9 h-9 text-amber-500"
-              activeLang={activeLang}
+            <img
+              className={`max-w-[35px] -mt-[2px] ${activeLang === "ar" ? "transform scale-x-[-1]" : ""}`}
+              src="/public/chatIcon.png"
+              alt=""
             />
             <div>
               <h1

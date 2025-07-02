@@ -52,7 +52,8 @@ const MessageBubble = ({ sender, text, activeLang }) => {
   const isUser = sender === "user";
 
   // Base styles for all bubbles
-  const baseBubbleStyles = "max-w-[80%] rounded-2xl px-4 py-2.5 shadow-md";
+  const baseBubbleStyles =
+    "max-w-[80%] rounded-2xl px-4 py-2.5 shadow-md text-sm";
 
   // Themed styles for user and bot
   const userStyles = `bg-gradient-to-r from-orange-500 to-amber-500 text-white ${activeLang === "en" ? "self-end rounded-br-none" : "self-start rounded-bl-none"} `;
@@ -62,7 +63,7 @@ const MessageBubble = ({ sender, text, activeLang }) => {
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div className={`${baseBubbleStyles} ${isUser ? userStyles : botStyles}`}>
         <p
-          className="font-size[13px]"
+          className={`font-size[13px] ${activeLang === "en" ? "font-inter" : "font-cairo"} leading-[1.8]`}
           dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
         ></p>
       </div>

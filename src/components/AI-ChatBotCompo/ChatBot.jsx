@@ -63,7 +63,7 @@ const MessageBubble = ({ sender, text, activeLang }) => {
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div className={`${baseBubbleStyles} ${isUser ? userStyles : botStyles}`}>
         <p
-          className={`font-size[13px] ${activeLang === "en" ? "font-inter" : "font-cairo"} leading-[1.8]`}
+          className={`text-[13px] ${activeLang === "en" ? "font-inter" : "font-cairo"} leading-[1.8]`}
           dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
         ></p>
       </div>
@@ -74,14 +74,14 @@ const MessageBubble = ({ sender, text, activeLang }) => {
 const TypeLoadingIndicator = ({ activeLang }) => {
   return (
     <div
-      class={`typeLoading flex ${activeLang === "en" ? "justify-start" : "justify-end"}`}
+      className={`typeLoading flex ${activeLang === "en" ? "justify-start" : "justify-end"}`}
     >
       <div
-        class={`bg-gray-700/80 p-3 rounded-lg ${activeLang === "en" ? " rounded-bl-none" : " rounded-br-none"} flex items-center space-x-2`}
+        className={`bg-gray-700/80 p-3 rounded-lg ${activeLang === "en" ? " rounded-bl-none" : " rounded-br-none"} flex items-center space-x-2`}
       >
-        <div class="dot dot-1 w-2 h-2 bg-gray-400 rounded-full"></div>
-        <div class="dot dot-2 w-2 h-2 bg-gray-400 rounded-full"></div>
-        <div class="dot dot-3 w-2 h-2 bg-gray-400 rounded-full"></div>
+        <div className="dot dot-1 w-2 h-2 bg-gray-400 rounded-full"></div>
+        <div className="dot dot-2 w-2 h-2 bg-gray-400 rounded-full"></div>
+        <div className="dot dot-3 w-2 h-2 bg-gray-400 rounded-full"></div>
       </div>
     </div>
   );
@@ -125,6 +125,7 @@ export default function ChatBotApp() {
       });
     }
   }, [messages]);
+
   async function handleSendingMsgToChat(userMsg) {
     try {
       setIsLoading(true);
@@ -198,7 +199,7 @@ export default function ChatBotApp() {
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
-              <span class="sr-only">Close chat</span>
+              <span className="sr-only">Close chat</span>
             </button>
           </div>
         </div>
@@ -213,7 +214,7 @@ export default function ChatBotApp() {
         >
           <div
             className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}
-            ref={chatContainerRef}
+            ref={chatContainerRef.current}
           >
             {messages &&
               messages.map((msg, index) => (
@@ -232,8 +233,7 @@ export default function ChatBotApp() {
                 text={error.message}
                 activeLang={activeLang}
               />
-            ))}
-            {isLoading && <TypeLoadingIndicator activeLang={activeLang} />}
+            )}
           </div>
           {/**Chat Bot input area */}
           <InputArea

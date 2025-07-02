@@ -66,7 +66,7 @@ function LangButton({ showToggle, setShowToggle, startHideTimer }) {
   return (
     <button
       type="button"
-      className={`peer top-7 p-[5px] ${showToggle ? "hidden" : "block"} box-border border-2 border-white rounded-full bg-[#FFC107] block md:hidden shadow-[0_0_5px_5px_grey]
+      className={`peer left-4 top-7 p-[5px] ${showToggle ? "hidden" : "block"} box-border border-2 border-white rounded-full bg-[#FFC107] block md:hidden shadow-[0_0_5px_5px_grey]
              hover:bg-[#DAA520] text-white 
              hover:!shadow-[0_0_5px_5px_#f17b4c] 
             

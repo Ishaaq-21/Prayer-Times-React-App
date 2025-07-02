@@ -45,7 +45,7 @@ export default {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
-        cairo: ["Cairo", "sans-serif"],
+        tajawal: ["tajawal", "sans-serif"],
       },
     },
   },

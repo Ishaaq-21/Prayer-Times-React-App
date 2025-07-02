@@ -47,6 +47,11 @@ export const Icon = ({ name, className, activeLang }) => {
   return icons[name] || null;
 };
 
+//this function will help style arabic texts when the language is english
+function detectLang(text) {
+  const arabicPattern = /[\u0600-\u06FF]/; //this regex checks any arabic letter ;
+  return arabicPattern.test(text) ? "ar" : "en";
+}
 // Visual-only Message Bubble Component with updated theme
 const MessageBubble = ({ sender, text, activeLang }) => {
   const isUser = sender === "user";
@@ -58,12 +63,13 @@ const MessageBubble = ({ sender, text, activeLang }) => {
   // Themed styles for user and bot
   const userStyles = `bg-gradient-to-r from-orange-500 to-amber-500 text-white ${activeLang === "en" ? "self-end rounded-br-none" : "self-start rounded-bl-none"} `;
   const botStyles = `bg-gray-700 text-gray-200 ${activeLang === "en" ? "self-start rounded-bl-none" : "self-end rounded-br-none"} `;
-
+  const currentLang = detectLang(text);
   return (
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div className={`${baseBubbleStyles} ${isUser ? userStyles : botStyles}`}>
         <p
-          className={`text-[13px] ${activeLang === "en" ? "font-inter" : "font-cairo"} leading-[1.8]`}
+          dir={`${currentLang === "en" ? "ltr" : "rtl"}`}
+          className={`text-[13px] ${currentLang === "en" ? "font-inter" : "font-tajawal"} leading-[1.8]`}
           dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
         ></p>
       </div>
@@ -175,7 +181,9 @@ export default function ChatBotApp() {
               activeLang={activeLang}
             />
             <div>
-              <h1 className="text-lg font-semibold text-yellow-400">
+              <h1
+                className={`text-[15px] font-semibold text-yellow-400 ${activeLang === "en" ? "font-inter" : "font-tajawal"} mt-[5px]`}
+              >
                 {t("aiChatBot")}
               </h1>
             </div>
@@ -241,9 +249,11 @@ export default function ChatBotApp() {
             handleClick={handleSendMessageClick}
             t={t}
             expand={expand}
+            detectLang={detectLang}
           />
         </div>
       </div>
+
       {/* 
         Button visible only on small and medium screens (sm, md). 
         Toggles the chatbot container on click for better mobile responsiveness.

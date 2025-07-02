@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./ChatBot";
 
-export default function InputArea({ activeLang, handleClick, t }) {
+export default function InputArea({ activeLang, handleClick, t, detectLang }) {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
   });
+
   return (
     <footer className={`p-4 border-t border-gray-700 flex-shrink-0`}>
       <div
@@ -17,7 +18,7 @@ export default function InputArea({ activeLang, handleClick, t }) {
           type="text"
           value={input}
           placeholder={t("askAiPlaceHolder")}
-          className={`flex-1 bg-transparent text-gray-200 text-[13px] placeholder-gray-500 focus:outline-none  px-2 ${activeLang === "en" ? "font-inter" : "font-cairo"}`}
+          className={`flex-1 bg-transparent text-gray-200 text-[13px] placeholder-gray-500 focus:outline-none  px-2 ${detectLang(input) === "en" ? "font-inter" : "font-tajawal"} `}
           onChange={(e) => setInput(e.target.value)}
           ref={inputRef}
         />
@@ -31,8 +32,10 @@ export default function InputArea({ activeLang, handleClick, t }) {
           <Icon name="send" className="w-5 h-5" />
         </button>
       </div>
+
+      {/* this is for the notice under the input area */}
       <p
-        className={`w-fit mx-auto text-[10px] text-accent-500 mt-2 -mb-[5px] text-center ${activeLang === "en" ? "font-inter" : "font-cairo"}`}
+        className={`w-fit mx-auto text-[10px] text-accent-500 mt-2 -mb-[5px] text-center ${activeLang === "en" ? "font-inter" : "font-tajawal"}`}
       >
         {t("aiNotice")}
       </p>

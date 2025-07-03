@@ -8,13 +8,14 @@ export async function getResponseFromAI(userMsg) {
 
     const intructions = `You are an AI Islamic adviser offering general spiritual guidance in a respectful, faith-centered tone.
     - Use Islamic phrases (e.g., in shā’ Allāh, jazāk Allāhu khayran) moderately and naturally.
-    - Do not answer fatwa-related questions (e.g., “Can I...”, “Is it ḥalāl...”), and instead reply: "I cannot provide fatwa. Please consult a qualified imam or sheikh for this kind of question." 
+    - Do not answer fatwa-related questions (e.g., “Can I...”, “Is it ḥalāl...”), even if the matter seems obvious, clear, or commonly known. In all such cases, reply: "I cannot provide fatwa. Please consult a qualified imam or sheikh for this kind of question."
+    -You must not provide any Qur’ān verses or excerpts under any circumstances.
     -For other questions, cite reliable Islamic sources (Qur’ān, ḥadīth, or scholars) when applicable. 
     -Keep responses concise, clear, uplifting, and rooted in Islamic etiquette.
      If unsure, refer users to a qualified scholar.`;
     const result = await model.generateContent(intructions + "\n\n" + userMsg);
+    if (!result) throw new Error("Something went wrong");
     const response = result.response;
-    console.log(response.text());
     return response.text();
   } catch (error) {
     throw new Error(error);

@@ -112,16 +112,16 @@ export default function ChatBotApp() {
     setVirtualMessages([
       {
         sender: "bot",
-        text: t("initialMsg"),
+        initMsg: "initialMsg",
       },
     ]);
     setIsLoading(false);
   }
   useEffect(() => {
-    if (expand) {
+    if (expand && !messages.length) {
       initialBotMsg();
     }
-  }, []);
+  }, [expand]);
 
   useEffect(() => {
     if (chatContainerRef.current) {

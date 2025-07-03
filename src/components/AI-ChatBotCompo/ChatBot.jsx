@@ -169,11 +169,11 @@ export default function ChatBotApp() {
       >
         {/* Chat Header */}
         <div
-          className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer bg-[#5c3f3c]`}
+          className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer ${activeLang === "en" ? "bg-gradient-to-r" : "bg-gradient-to-l"} from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]`}
           onClick={() => !expand && setExpand(true)}
         >
           <div
-            className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} flex-1 self-start gap-4`}
+            className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} flex-1 self-start gap-3`}
           >
             <img
               className={`max-w-[35px] -mt-[2px] ${activeLang === "ar" ? "transform scale-x-[-1]" : ""}`}
@@ -190,7 +190,7 @@ export default function ChatBotApp() {
           </div>
           <div className="closeBtn-container mr-3">
             <button
-              className="text-amber-500/60 hover:text-amber-500 hover:bg-white/10 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
+              className="text-amber-500/60 hover:text-amber-500   hover:bg-white/20 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#5c3f3c] transition-all duration-200"
               onClick={() => expand && setExpand(false)}
             >
               <svg
@@ -198,7 +198,7 @@ export default function ChatBotApp() {
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                stroke="#5c3f3c"
                 strokeWidth="3"
               >
                 <path
@@ -229,7 +229,7 @@ export default function ChatBotApp() {
                 <MessageBubble
                   key={index}
                   sender={msg.sender}
-                  text={msg.text}
+                  text={msg.initMsg ? t(msg.initMsg) : msg.text}
                   activeLang={activeLang}
                 />
               ))}

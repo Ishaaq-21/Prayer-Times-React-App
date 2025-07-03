@@ -137,25 +137,30 @@ export default function ChatBotApp() {
       setError(null);
       const aiMsg = await getResponseFromAI(userMsg);
       setIsLoading(false);
-      return aiMsg;
-    } catch (error) {
-      setError(error.message);
-
+      return { aiMsg, retError: null };
+    } catch (err) {
       setIsLoading(false);
+      return { aiMsg: null, retError: err };
     }
   }
   function addUserToChatHistory(userObj) {
-    setVirtualMessages((prev) => [...prev, userObj]);
+    setMessages((prev) => [...prev, userObj]);
   }
   async function handleSendMessageClick(inputMsg) {
     if (inputMsg.trim() === "") return;
     const userObj = { sender: "user", text: inputMsg };
     addUserToChatHistory(userObj);
-    let aiMsg = await handleSendingMsgToChat(inputMsg);
-    // let aiMsg = await sleepSendMsg();
-    const botMsg = { sender: "bot", text: aiMsg };
-
-    setVirtualMessages((prev) => [...prev, botMsg]);
+    let { aiMsg, retError } = await handleSendingMsgToChat(inputMsg);
+    let botMsg = null;
+    if (retError) {
+      botMsg = {
+        sender: "bot",
+        specialMsg: "unexpectedErrorMessage",
+      };
+    } else {
+      botMsg = { sender: "bot", text: aiMsg };
+    }
+    setMessages((prev) => [...prev, botMsg]);
   }
   function handleChatBotToggleClick() {
     setExpand((prev) => !prev);

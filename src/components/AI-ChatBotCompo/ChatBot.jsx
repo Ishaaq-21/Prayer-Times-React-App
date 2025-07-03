@@ -1,4 +1,4 @@
-import React, { act, useContext, useEffect, useState } from "react";
+import React, { act, useContext, useEffect, useRef, useState } from "react";
 import { PrayersTimesContext } from "../../contexts/PrayersTimesProvider";
 import InputArea from "./InputArea";
 import ChatBotToggleBtn from "./ChatBotToggleBtn";
@@ -55,7 +55,6 @@ function detectLang(text) {
 // Visual-only Message Bubble Component with updated theme
 const MessageBubble = ({ sender, text, activeLang }) => {
   const isUser = sender === "user";
-
   // Base styles for all bubbles
   const baseBubbleStyles =
     "max-w-[80%] rounded-2xl px-4 py-2.5 shadow-md text-sm";
@@ -101,18 +100,18 @@ export default function ChatBotApp() {
   const { t, activeLang } = useContext(PrayersTimesContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const chatContainerRef = useState(null);
-  const [messages, setVirtualMessages] = useState([]);
+  const chatContainerRef = useRef(null);
+  const [messages, setMessages] = useState([]);
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   async function initialBotMsg() {
     setIsLoading(true);
-    setVirtualMessages([]);
+    setMessages([]);
     await sleep(2000);
-    setVirtualMessages([
+    setMessages([
       {
         sender: "bot",
-        initMsg: "initialMsg",
+        specialMsg: "initialMsg",
       },
     ]);
     setIsLoading(false);
@@ -137,7 +136,6 @@ export default function ChatBotApp() {
       setIsLoading(true);
       setError(null);
       const aiMsg = await getResponseFromAI(userMsg);
-
       setIsLoading(false);
       return aiMsg;
     } catch (error) {
@@ -222,14 +220,14 @@ export default function ChatBotApp() {
         >
           <div
             className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}
-            ref={chatContainerRef.current}
+            ref={chatContainerRef}
           >
             {messages &&
               messages.map((msg, index) => (
                 <MessageBubble
                   key={index}
                   sender={msg.sender}
-                  text={msg.initMsg ? t(msg.initMsg) : msg.text}
+                  text={msg.specialMsg ? t(msg.specialMsg) : msg.text}
                   activeLang={activeLang}
                 />
               ))}

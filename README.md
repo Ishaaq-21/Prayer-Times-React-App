@@ -30,14 +30,6 @@ A modern, responsive web application that displays accurate daily prayer times f
 - **Error Handling:**  
   User-friendly error messages for city not found, network issues, and unexpected errors.
 
----
-
-## 🖼️ Screenshots
-
-> _Add screenshots here if available_
-![Uploading image.png…]()
-
----
 
 ## 🚀 Getting Started
 

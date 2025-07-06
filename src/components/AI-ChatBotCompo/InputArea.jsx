@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Icon } from "./ChatBot";
 import clsx from "clsx";
+import { Icon } from "./ChatBot";
+
 export default function InputArea({ activeLang, handleClick, t, detectLang }) {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const enterBtnRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
-
+  });
+  console.log(typeof input);
   function handleEnterClick(e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -16,9 +17,12 @@ export default function InputArea({ activeLang, handleClick, t, detectLang }) {
     }
   }
   return (
-    <footer className={`p-4 border-t border-gray-700 flex-shrink-0`}>
+    <footer className="p-4 border-t border-gray-700 flex-shrink-0">
       <div
-        className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} items-center gap-2 bg-gray-700/50 rounded-xl p-2`}
+        className={clsx(
+          "flex items-center gap-2 bg-gray-700/50 rounded-xl p-2",
+          { "flex-row-reverse": activeLang === "ar" }
+        )}
       >
         <input
           dir={activeLang === "ar" ? "rtl" : "ltr"}
@@ -27,20 +31,25 @@ export default function InputArea({ activeLang, handleClick, t, detectLang }) {
           placeholder={t("askAiPlaceHolder")}
           className={clsx(
             "flex-1 bg-transparent text-gray-200 text-[13px] placeholder-gray-500 focus:outline-none px-2",
-            detectLang(input) === "en" ? "font-inter" : "font-tajawal"
+            {
+              "font-inter": detectLang(input) === "en",
+              "font-tajawal": detectLang(input) !== "en",
+            }
           )}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleEnterClick}
           ref={inputRef}
-          aria-label={t("askAiPlaceHolder")}
         />
         <button
+          ref={enterBtnRef}
           className={clsx(
-            "p-2.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 text-white",
-            activeLang === "ar" ? "transform rotate-180" : ""
+            "p-2.5 rounded-full bg-gradient-to-r from-orange-500 py-1 px-2 to-amber-500 text-white cursor-pointer",
+            { "transform rotate-180": activeLang === "ar" }
           )}
-          onClick={handleClick}
-          aria-label="Send Message"
+          onClick={() => {
+            setInput("");
+            handleClick(input);
+          }}
         >
           <Icon name="send" className="w-5 h-5" />
         </button>
@@ -50,7 +59,10 @@ export default function InputArea({ activeLang, handleClick, t, detectLang }) {
       <p
         className={clsx(
           "w-fit mx-auto text-[10px] text-accent-500 mt-2 -mb-[5px] text-center",
-          activeLang === "en" ? "font-inter" : "font-tajawal"
+          {
+            "font-inter": activeLang === "en",
+            "font-tajawal": activeLang !== "en",
+          }
         )}
       >
         {t("aiNotice")}

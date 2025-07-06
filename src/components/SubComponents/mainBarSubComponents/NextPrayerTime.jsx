@@ -12,7 +12,7 @@ export default function NextPrayerTime({
   return (
     <div
       dir={`${activeLang === "ar" ? "rtl" : "ltr"}`}
-      className={`${activeLang == "ar" ? "sm:order-2 md:order-2  lg:order-3" : "lg:order-3"} md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl 2xl:text-5xl`}
+      className={`${activeLang == "ar" ? "sm:order-2 md:order-2  lg:order-3 font-tajawal" : "lg:order-3 font-inter"} md:col-span-1 lg:col-span-full lg:-mt-2 text-center text-3xl 2xl:text-5xl`}
     >
       <p className="title-shadow text-white mb-1 font-bold shadow-text tracking-wide leading-relaxed">
         <span className="text-accent-500">

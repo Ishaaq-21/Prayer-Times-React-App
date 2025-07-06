@@ -11,6 +11,7 @@ import { handleFinalRemainingTimesInterval } from "./Helpers/dateLogic";
 import { ThreeDot } from "react-loading-indicators";
 import CityTime from "./SubComponents/mainBarSubComponents/CityTime";
 import NextPrayerTime from "./SubComponents/mainBarSubComponents/NextPrayerTime";
+import clsx from "clsx";
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
 
@@ -72,7 +73,6 @@ export default function MainBar() {
       clearInterval(intervalId.current);
     };
   }, [initialCityTimeString, prayersTimes]);
-
   return (
     <div className="my-8 lg:mt-5 2xl:my-10 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
       <SearchCompo
@@ -82,9 +82,15 @@ export default function MainBar() {
       ></SearchCompo>
       <p
         dir={activeLang === "en" ? "ltr" : "rtl"}
-        className={`${activeLang == "ar" ? "sm:order-0 md:order-0 lg:order-1" : "md:order-0 lg:order-1"}  text-white text-3xl 2xl:text-5xl font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1`}
+        className={clsx(
+          {
+            "sm:order-0 md:order-0 lg:order-1 font-inter": activeLang === "en",
+            "md:order-0 lg:order-1 font-tajawal": activeLang === "ar",
+          },
+          "text-white text-3xl 2xl:text-5xl font-bold text-center  shadow-text   tracking-wide leading-relaxed -translate-y-1"
+        )}
       >
-        <span className="title-shadow text-accent-500">{t("city")} </span>{" "}
+        <span className="title-shadow text-accent-500 ">{t("city")} </span>{" "}
         {isLoading ? (
           <ThreeDot color={["#ac8424", "#d3a330", "#dcb65a", "#e5c984"]} />
         ) : !error ? (

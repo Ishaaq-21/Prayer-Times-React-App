@@ -195,7 +195,7 @@ export default function ChatBotApp() {
     <>
       <div
         className={clsx(
-          "w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute transform left-1/2 -translate-x-1/2 transition-all duration-1000 overflow-hidden",
+          "w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute transform left-1/2 -translate-x-1/2 transition-all duration-300 overflow-hidden",
           { "bottom-0": expand, "-bottom-12 lg:-bottom-0": !expand },
           {
             "sm:right-[25px] sm:left-auto sm:-translate-x-0":

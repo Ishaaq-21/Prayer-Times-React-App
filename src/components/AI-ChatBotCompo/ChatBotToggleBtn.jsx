@@ -5,12 +5,12 @@ export default function ChatBotToggleBtn({
   handleToggleClick,
   expand,
 }) {
-  function getPositionClasses() {
-    clsx("fixed block lg:hidden bottom-6 z-10", {
+  const getPositionClasses = () => {
+    return clsx("fixed block lg:hidden bottom-6 z-10", {
       "right-8 left-auto": activeLang === "en",
       "left-8 right-auto": activeLang === "ar",
     });
-  }
+  };
   return (
     <div className={getPositionClasses()}>
       <button

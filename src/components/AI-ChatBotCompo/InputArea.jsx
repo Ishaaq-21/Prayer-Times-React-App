@@ -8,7 +8,7 @@ export default function InputArea({ activeLang, handleClick, t, detectLang }) {
   const enterBtnRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
-  });
+  }, []);
   console.log(typeof input);
   function handleEnterClick(e) {
     if (e.key === "Enter") {

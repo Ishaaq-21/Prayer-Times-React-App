@@ -7,6 +7,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "tailwindcss/preflight.css" layer(base);
+
 @layer utilities {
   .bg-gradient-45 {
     background-image: linear-gradient(45deg, #fff, #f0f0f0, #fff);
@@ -23,12 +25,12 @@
     }
   }
 }
-
+/* 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 body {
   background-image: url("./assets/bg.jpg");
   background-size: cover;

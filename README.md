@@ -35,6 +35,7 @@ A modern, responsive web application that displays accurate daily prayer times f
 ## 🖼️ Screenshots
 
 > _Add screenshots here if available_
+![Uploading image.png…]()
 
 ---
 

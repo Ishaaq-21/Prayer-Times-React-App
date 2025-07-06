@@ -194,11 +194,26 @@ export default function ChatBotApp() {
   return (
     <>
       <div
-        className={`w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute ${expand ? "bottom-0" : "-bottom-12 lg:-bottom-0"} transform left-1/2 -translate-x-1/2 ${activeLang === "en" ? "sm:right-[25px] sm:left-auto sm:-translate-x-0" : "sm:left-[25px] sm:right-auto sm:-translate-x-0"} transition-all duration-3000 overflow-hidden`}
+        className={clsx(
+          "w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute transform left-1/2 -translate-x-1/2 transition-all duration-1000 overflow-hidden",
+          { "bottom-0": expand, "-bottom-12 lg:-bottom-0": !expand },
+          {
+            "sm:right-[25px] sm:left-auto sm:-translate-x-0":
+              activeLang === "en",
+            "sm:left-[25px] sm:right-auto sm:-translate-x-0":
+              activeLang === "ar",
+          }
+        )}
       >
         {/* Chat Header */}
         <div
-          className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer ${activeLang === "en" ? "bg-gradient-to-r" : "bg-gradient-to-l"} from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]`}
+          className={clsx(
+            "flex items-center gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer  from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]",
+            {
+              "bg-gradient-to-r": activeLang === "en",
+              "bg-gradient-to-l flex-row-reverse": activeLang === "ar",
+            }
+          )}
           onClick={() => !expand && setExpand(true)}
         >
           <div
@@ -243,11 +258,13 @@ export default function ChatBotApp() {
 
         {/* Chat History (Scrollable) */}
         <div
-          className={`
-    overflow-hidden transition-all duration-500
-    ${expand ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}
-    flex-1
-  `}
+          className={clsx(
+            " overflow-hidden transition-all duration-500  flex-1",
+            {
+              "max-h-[420px] opacity-100": expand,
+              "max-h-0 opacity-0": !expand,
+            }
+          )}
         >
           <div
             className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}

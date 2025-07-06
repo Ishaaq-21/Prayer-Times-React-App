@@ -20,7 +20,7 @@ export default function PrayerCard({ prayerName, prayerTime, t }) {
         <img
           className="max-w-24 mx-auto"
           src={mapIcons[prayerName]}
-          alt="Maghrib prayer icon"
+          alt={`${prayerName} prayer icon`}
         />
 
         <p className="prayer-name text-amber-500 text-3xl sm:text-4xl font-bold mb-5 mx-auto w-fit shadow-text">

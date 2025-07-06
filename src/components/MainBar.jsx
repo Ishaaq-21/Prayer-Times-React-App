@@ -74,12 +74,15 @@ export default function MainBar() {
     };
   }, [initialCityTimeString, prayersTimes]);
   return (
+    // Search component
     <div className="my-8 lg:mt-5 2xl:my-10 px-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-3 gap-y-5">
       <SearchCompo
         resetNextPrayer={resetNextPrayer}
         t={t}
         activeLang={activeLang}
       ></SearchCompo>
+
+      {/* City searched name */}
       <p
         dir={activeLang === "en" ? "ltr" : "rtl"}
         className={clsx(
@@ -97,13 +100,17 @@ export default function MainBar() {
           lastCityName.current === "Makkah" ||
           lastCityName.current === "مكة" ? (
             t("Makkah")
+          ) : lastCityName.current ? (
+            lastCityName.current.charAt(0).toUpperCase() +
+            lastCityName.current.slice(1)
           ) : (
-            lastCityName.current
+            ""
           )
         ) : (
           t("unknown")
         )}
       </p>
+      {/* City Time field */}
       <CityTime
         isLoading={isLoading}
         error={error}
@@ -111,6 +118,7 @@ export default function MainBar() {
         t={t}
         activeLang={activeLang}
       />
+      {/* Next prayer time field */}
       <NextPrayerTime
         nextPrayer={nextPrayer}
         gettingTime={gettingTime}

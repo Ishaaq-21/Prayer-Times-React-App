@@ -8,7 +8,7 @@ export default function ChatBotToggleBtn({
       className={`fixed block lg:hidden bottom-6 ${activeLang === "en" ? "right-8 left-auto" : "left-8 right-auto"} z-10`}
     >
       <button
-        className={`bg-gradient-to-r from-amber-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:scale-110 hover:from-amber-400 hover:to-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-gray-900 transition-transform duration-300 ease-in-out  ${expand ? "opacity-0 invisible hidden" : "opacity-1 visible block"}`}
+        className={`bg-gradient-to-r from-amber-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:scale-110 hover:from-amber-400 hover:to-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-gray-900 transition-transform duration-300 ease-in-out  ${expand ? " hidden" : " block"}`}
         onClick={handleToggleClick}
       >
         <svg

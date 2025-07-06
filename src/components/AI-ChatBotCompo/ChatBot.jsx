@@ -118,11 +118,6 @@ const TypeLoadingIndicator = ({ activeLang }) => {
   );
 };
 
-const CONFIG = {
-  MAX_WIDTH: "max-w-[320px] md:max-w-[350px]",
-  MAX_HEIGHT: "max-h-[480px]",
-  CHAT_HEIGHT: "h-[320px]",
-};
 // Main Chatbot UI Component with updated theme (Presentation Only)
 export default function ChatBotApp() {
   // Static message data for demonstration purposes.
@@ -174,75 +169,52 @@ export default function ChatBotApp() {
       return { aiMsg: null, retError: err };
     }
   }
-  
+  function addUserToChatHistory(userObj) {
+    setMessages((prev) => [...prev, userObj]);
+  }
   async function handleSendMessageClick(inputMsg) {
     if (inputMsg.trim() === "") return;
     const userObj = { sender: "user", text: inputMsg };
-    setMessages((prev) => [...prev, userObj]);
+    addUserToChatHistory(userObj);
     let { aiMsg, retError } = await handleSendingMsgToChat(inputMsg);
-    let botMsg = retError ? 
+    let botMsg = null;
+    if (retError) {
       botMsg = {
         sender: "bot",
-        specialMsg: "unexpectedErrorMessage"} : 
-      botMsg = { sender: "bot", text: aiMsg }
+        specialMsg: "unexpectedErrorMessage",
+      };
+    } else {
+      botMsg = { sender: "bot", text: aiMsg };
     }
     setMessages((prev) => [...prev, botMsg]);
   }
   function handleChatBotToggleClick() {
     setExpand((prev) => !prev);
   }
-
-
   return (
     <>
-    <div
-      className={clsx(
-        "w-full flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute overflow-hidden",
-        CONFIG.MAX_WIDTH,
-        CONFIG.MAX_HEIGHT,
-        expand
-          ? "bottom-0"
-          : "-bottom-12 lg:-bottom-0",
-        "transform left-1/2 -translate-x-1/2",
-        activeLang === "en"
-          ? "sm:right-[25px] sm:left-auto sm:-translate-x-0"
-          : "sm:left-[25px] sm:right-auto sm:-translate-x-0",
-        "transition-all duration-3000"
-      )}
-    >
-
+      <div
+        className={`w-full max-w-[320px] md:max-w-[350px] max-h-[480px] flex flex-col bg-[#3a2927] rounded-2xl rounded-b-none shadow-2xl border border-gray-700 fixed lg:absolute ${expand ? "bottom-0" : "-bottom-12 lg:-bottom-0"} transform left-1/2 -translate-x-1/2 ${activeLang === "en" ? "sm:right-[25px] sm:left-auto sm:-translate-x-0" : "sm:left-[25px] sm:right-auto sm:-translate-x-0"} transition-all duration-3000 overflow-hidden`}
+      >
         {/* Chat Header */}
         <div
-          className={clsx(
-            "flex items-center gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]",
-            activeLang === "ar" && "flex-row-reverse",
-            activeLang === "en" ? "bg-gradient-to-r" : "bg-gradient-to-l",
-          )}
-          onClick={() => !expand && setExpand(true)}
-        >
-        <div
-          className={clsx("flex items-center gap-4 px62 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]", activeLang === "ar" && "flex-row-reverse", {"bg-gradient-to-r": activeLang === "en", "bg-gradient-to-l": activeLang === "ar"})}
+          className={`flex items-center ${activeLang === "ar" ? "flex-row-reverse" : ""} gap-4 px-2 py-[6px] border-b border-gray-700 flex-shrink-0 cursor-pointer ${activeLang === "en" ? "bg-gradient-to-r" : "bg-gradient-to-l"} from-[#5c3f3c] via-[#7c4a3e] to-[#f7b267]`}
           onClick={() => !expand && setExpand(true)}
         >
           <div
-            className={clsx("flex flex-1 self-start gap-3", activeLang === "ar" && "flex-row-reverse")}
-                      >
+            className={`flex ${activeLang === "ar" ? "flex-row-reverse" : ""} flex-1 self-start gap-3`}
+          >
             <img
-              className={clsx("max-w-[35px] -mt-[2px]", activeLang === "ar" && "transform scale-x-[-1]")}
-              
+              className={`max-w-[35px] -mt-[2px] ${activeLang === "ar" ? "transform scale-x-[-1]" : ""}`}
               src="/public/chatIcon.png"
-              alt="chatBot Icon"
+              alt=""
             />
             <div>
               <h1
-                className={clsx(
-                  "text-[15px] font-semibold text-yellow-400 mt-[5px]",
-                  activeLang === "en" ? "font-inter" : "font-tajawal"
-                )}
+                className={`text-[15px] font-semibold text-yellow-400 ${activeLang === "en" ? "font-inter" : "font-tajawal"} mt-[5px]`}
               >
                 {t("aiChatBot")}
               </h1>
-
             </div>
           </div>
           <div className="closeBtn-container mr-3">
@@ -271,11 +243,11 @@ export default function ChatBotApp() {
 
         {/* Chat History (Scrollable) */}
         <div
-        className={clsx(
-          "overflow-hidden transition-all duration-500 flex-1",
-          expand ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
-        )}
-   
+          className={`
+    overflow-hidden transition-all duration-500
+    ${expand ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}
+    flex-1
+  `}
         >
           <div
             className={`flex-1 p-6 overflow-y-auto space-y-6 h-[320px]`}

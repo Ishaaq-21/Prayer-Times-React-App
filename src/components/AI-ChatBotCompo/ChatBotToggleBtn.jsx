@@ -1,14 +1,28 @@
+import clsx from "clsx";
+
 export default function ChatBotToggleBtn({
   activeLang,
   handleToggleClick,
   expand,
 }) {
+  function getPositionClasses() {
+    clsx("fixed block lg:hidden bottom-6 z-10", {
+      "right-8 left-auto": activeLang === "en",
+      "left-8 right-auto": activeLang === "ar",
+    });
+  }
   return (
-    <div
-      className={`fixed block lg:hidden bottom-6 ${activeLang === "en" ? "right-8 left-auto" : "left-8 right-auto"} z-10`}
-    >
+    <div className={getPositionClasses()}>
       <button
-        className={`bg-gradient-to-r from-amber-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:scale-110 hover:from-amber-400 hover:to-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-gray-900 transition-transform duration-300 ease-in-out  ${expand ? " hidden" : " block"}`}
+        className={clsx(
+          "bg-gradient-to-r from-amber-500 to-orange-600 text-white p-3 rounded-full shadow-lg",
+          "hover:scale-110 hover:from-amber-400 hover:to-orange-500",
+          "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-gray-900",
+          "transition-transform duration-300 ease-in-out",
+          { hidden: expand }
+        )}
+        aria-label="Open Chatbot"
+        aria-expanded={!expand}
         onClick={handleToggleClick}
       >
         <svg

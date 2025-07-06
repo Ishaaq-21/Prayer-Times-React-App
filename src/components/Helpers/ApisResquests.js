@@ -8,7 +8,6 @@ export class notFoundError extends Error {
   }
 }
 const timeZoneApiKey = import.meta.env.VITE_TIMEZONEDB_API_KEY;
-console.log(timeZoneApiKey);
 const getCityLocationData = async (cityName) => {
   //This api returns some data related to the provided city(country, latitude, longitude, state, country code....etc)
 
@@ -59,7 +58,6 @@ const getPrayersTimesFromApi = async (
     const cityPrayerData = cityPrayersResp.data;
     if (!cityPrayerData) throw new Error("Failed to fetch prayers data");
     const prayersTiming = cityPrayerData.data.timings;
-    console.log(prayersTiming);
     const prayerTimingArr = [
       { id: 1, prayerName: "Fajr", time: prayersTiming.Fajr },
       { id: 2, prayerName: "Dhuhr", time: prayersTiming.Dhuhr },
@@ -86,10 +84,6 @@ export const getPrayersTimes = async (cityName) => {
       prayerCalculationMethodsByCountry["default"];
     // await getTimeOfCity(cityLocationData.latitude, cityLocationData.longitude);
 
-    console.log("Searched city country : -> " + cityLocationData.country);
-    console.log("Searched country method code : -> " + countryMethodCode);
-    console.log("searched city latittude : -> " + cityLocationData.latitude);
-    console.log("searched city longitude : -> " + cityLocationData.longitude);
     const searchedCityTimeString = await getTimeOfCity(
       cityLocationData.latitude,
       cityLocationData.longitude

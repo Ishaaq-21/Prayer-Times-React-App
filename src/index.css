@@ -38,6 +38,11 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 640px) {
+  body {
+    background-image: url("./assets/bg_mobiles.jpg");
+  }
+}
 .shadow-text {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }

@@ -1,9 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import SearchCompo from "./SubComponents/mainBarSubComponents/SearchCompo";
-import {
-  MainBarInfoConext,
-  PrayersTimesContext,
-} from "../contexts/PrayersTimesProvider";
+import { PrayersTimesContext } from "../contexts/PrayersTimesProvider";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import customParseFormat from "dayjs/plugin/customParseFormat";

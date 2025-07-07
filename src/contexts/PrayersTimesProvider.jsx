@@ -1,10 +1,9 @@
-import { createContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
 import { getPrayersTimes } from "../components/Helpers/ApisResquests";
 import { notFoundError } from "../components/Helpers/ApisResquests";
 import { useTranslation } from "react-i18next";
 export const PrayersTimesContext = createContext({});
-export const MainBarInfoConext = createContext({});
 
 const PrayersDataProvider = ({ children }) => {
   //statues

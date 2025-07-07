@@ -27,7 +27,7 @@ const LanguageToggle = () => {
       />
 
       <div
-        className={`${showToggle ? "top-6 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-3000 md:top-6 md:left-8 tablet-buttons-container  `}
+        className={`${showToggle ? "top-6 left-[22px] " : "top-[-150px]  left-[22px]"} absolute z-50 transition-all duration-100 md:top-6 md:left-8 tablet-buttons-container  `}
       >
         <div className="inline-flex flex-col md:flex-row bg-black/20 rounded-full overflow-hidden border border-white/20 backdrop-blur-md p-1">
           {/* English Button */}

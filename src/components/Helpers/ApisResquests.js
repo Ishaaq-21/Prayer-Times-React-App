@@ -82,15 +82,14 @@ export const getPrayersTimes = async (cityName) => {
       prayerCalculationMethodsByCountry["default"];
     // await getTimeOfCity(cityLocationData.latitude, cityLocationData.longitude);
 
-    const searchedCityTimeString = await getTimeOfCity(
-      cityLocationData.latitude,
-      cityLocationData.longitude
-    );
-    const prayersData = await getPrayersTimesFromApi(
-      cityLocationData.latitude,
-      cityLocationData.longitude,
-      countryMethodCode
-    );
+    const [searchedCityTimeString, prayersData] = await Promise.all([
+      getTimeOfCity(cityLocationData.latitude, cityLocationData.longitude),
+      getPrayersTimesFromApi(
+        cityLocationData.latitude,
+        cityLocationData.longitude,
+        countryMethodCode
+      ),
+    ]);
     return { prayersData, searchedCityTimeString };
   } catch (err) {
     if (err instanceof notFoundError) {

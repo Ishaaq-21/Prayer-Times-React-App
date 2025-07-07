@@ -10,17 +10,10 @@ export default function FivePrayers() {
 
   let PrayerCardsList = [];
   if (prayersTimes) {
-    PrayerCardsList = prayersTimes.map((prayer, index) => {
+    PrayerCardsList = prayersTimes.map((prayer) => {
       return (
         <PrayerCard
           key={prayer.id}
-          className={
-            prayer.prayerName === "Fajr"
-              ? "order-4"
-              : prayer.prayerName === "Isha"
-                ? "order-0"
-                : ""
-          }
           prayerName={prayer.prayerName}
           prayerTime={prayer.time}
           t={t}

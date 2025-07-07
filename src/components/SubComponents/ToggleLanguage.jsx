@@ -67,10 +67,10 @@ function LangButton({ showToggle, setShowToggle, startHideTimer }) {
     <button
       type="button"
       className={`peer left-4 top-7 p-[5px] ${showToggle ? "hidden" : "block"} box-border border-2 border-white rounded-full bg-[#FFC107] block md:hidden shadow-[0_0_5px_5px_grey]
-             hover:bg-[#DAA520] text-white 
-             hover:!shadow-[0_0_5px_5px_#f17b4c] 
-            
-             transition duration-300 
+             hover:bg-[#DAA520] text-white
+             hover:!shadow-[0_0_5px_5px_#f17b4c]
+
+             transition duration-300
              focus:outline-none focus:ring-white absolute top-12`}
       aria-label="Select language"
       onClick={() => {
@@ -111,4 +111,57 @@ function LangButton({ showToggle, setShowToggle, startHideTimer }) {
     </button>
   );
 }
+
+// function LangButton({ showToggle, setShowToggle, startHideTimer }) {
+//   return (
+//     <button
+//       type="button"
+//       className={`peer absolute top-7 left-4 z-50 h-10 w-10 rounded-full block md:hidden
+//                  bg-gradient-to-br from-amber-500 to-orange-600 text-white
+//                  flex items-center justify-center
+//                  shadow-md hover:shadow-lg
+//                  transition-all duration-300 ease-in-out
+//                  transform group focus:outline-none
+//                  focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-gray-800
+//                  ${showToggle ? "hidden" : "block"}`}
+//       aria-label="Select language"
+//       onClick={() => {
+//         const next = !showToggle;
+//         setShowToggle(next);
+//         if (next) startHideTimer();
+//       }}
+//     >
+//       {/* Reverted to the original text-based SVG icon concept with a hover effect */}
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         className="h-8 w-8 transition-transform duration-300 group-hover:rotate-12"
+//         viewBox="0 0 32 32"
+//         fill="currentColor"
+//       >
+//         <text
+//           x="15"
+//           y="14"
+//           fontSize="14"
+//           fontFamily="sans-serif"
+//           fontWeight="bold"
+//           textAnchor="middle"
+//           dominantBaseline="middle"
+//         >
+//           文
+//         </text>
+//         <text
+//           x="21"
+//           y="22"
+//           fontSize="12"
+//           fontFamily="sans-serif"
+//           fontWeight="bold"
+//           textAnchor="middle"
+//           dominantBaseline="middle"
+//         >
+//           A
+//         </text>
+//       </svg>
+//     </button>
+//   );
+// }
 export default LanguageToggle;

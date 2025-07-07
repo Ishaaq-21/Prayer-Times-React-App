@@ -71,11 +71,9 @@ const getPrayersTimesFromApi = async (
     throw new Error(err.message);
   }
 };
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //this just for debugging
 
 export const getPrayersTimes = async (cityName) => {
   try {
-    await sleep(1);
     // await sleep(5000);
     const cityLocationData = await getCityLocationData(cityName);
     //Now based on the country name, we will find the nearest calculation method of that country (search about what calculation method of prayer apis is)

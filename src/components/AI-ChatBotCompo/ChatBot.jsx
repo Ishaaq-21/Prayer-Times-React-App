@@ -5,6 +5,8 @@ import ChatBotToggleBtn from "./ChatBotToggleBtn";
 import { getResponseFromAI } from "./ChatBotHelpers/chatBotApiRequests";
 import "./ChatBotHelpers/chatTypeLoading.css";
 import clsx from "clsx";
+import { v4 as uuidv4 } from "uuid";
+
 // Helper component for Icons
 export const Icon = ({ name, className, activeLang }) => {
   const icons = {
@@ -271,9 +273,9 @@ export default function ChatBotApp() {
             ref={chatContainerRef}
           >
             {messages &&
-              messages.map((msg, index) => (
+              messages.map((msg) => (
                 <MessageBubble
-                  key={index}
+                  key={uuidv4()}
                   sender={msg.sender}
                   text={msg.specialMsg ? t(msg.specialMsg) : msg.text}
                   activeLang={activeLang}
@@ -282,7 +284,7 @@ export default function ChatBotApp() {
             {isLoading && <TypeLoadingIndicator activeLang={activeLang} />}
             {error && (
               <MessageBubble
-                key={1}
+                key={uuidv4()}
                 sender={"bot"}
                 text={error.message}
                 activeLang={activeLang}

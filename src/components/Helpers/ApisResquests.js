@@ -35,9 +35,9 @@ const getCityLocationData = async (cityName) => {
 };
 const getTimeOfCity = async (latitude, longitude) => {
   try {
-    const timeResponse = await axios.get(
-      `https:api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
-    );
+    const timeZoneApiUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=${timeZoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`;
+
+    const timeResponse = await axios.get(timeZoneApiUrl);
     if (!timeResponse) throw new Error("Something went wrong");
     const rawCurrTimStringe = timeResponse.data.formatted;
     return rawCurrTimStringe;

@@ -1,6 +1,6 @@
 # Muslim Prayer Times Web App
 
-A modern, responsive web application that displays accurate daily prayer times for any city worldwide, with support for English and Arabic languages, and an integrated AI-powered Islamic assistant chatbot
+A modern, responsive web application that displays accurate daily prayer times for any city worldwide, with support for English and Arabic languages, and an integrated AI-powered Islamic assistant chatbot.
 
 ---
 

@@ -30,7 +30,7 @@
   padding: 0;
 }
 body {
-  background-image: url("./assets/bg.jpg");
+  background-image: image-set(url("./assets/bg.avif"), url("./assets/bg.jpg"));
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -40,7 +40,10 @@ body {
 }
 @media (max-width: 640px) {
   body {
-    background-image: url("./assets/bg_mobiles.jpg");
+    background-image: image-set(
+      url("./assets/bg_mobiles.avif"),
+      url("./assets/bg_mobiles.jpg")
+    );
   }
 }
 .shadow-text {
